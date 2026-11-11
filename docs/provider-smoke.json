@@ -1,0 +1,69 @@
+{
+  "validation_date": "2026-11-11",
+  "validation_type": "live public read-only requests through Repo Scout provider modules",
+  "candidate_code_executed": false,
+  "credentials_recorded": false,
+  "checks": [
+    {
+      "provider": "github",
+      "operation": "search",
+      "query": "langchain",
+      "limit": 2,
+      "status": "ok",
+      "count": 2,
+      "items": [
+        {"name": "microsoft/markitdown", "stars": 194853},
+        {"name": "langchain-ai/langchain", "stars": 149338}
+      ],
+      "limitation": "Search is sorted by stars and uses provider search semantics. A returned repository mentioning LangChain is not automatically a close alternative. This smoke check exercised search, not full GitHub inspection."
+    },
+    {
+      "provider": "gitee",
+      "operation": "search",
+      "query": "langchain",
+      "limit": 2,
+      "status": "ok",
+      "count": 0,
+      "limitation": "A successful empty result is preserved literally. It does not establish absence of LangChain repositories or broad discoverability of the Gitee search endpoint."
+    },
+    {
+      "provider": "gitee",
+      "operation": "resolve",
+      "input": "mirrors/langchain",
+      "status": "ok",
+      "name": "mirrors/LangChain",
+      "stars": 36,
+      "default_branch": "master",
+      "url": "https://gitee.com/mirrors/LangChain",
+      "limitation": "Metadata retrieval succeeded even though the preceding search returned no items. Full Gitee inspection was not part of this smoke check; authenticated Gitee token handling was not live-tested."
+    },
+    {
+      "provider": "gitlab",
+      "operation": "search",
+      "query": "langchain",
+      "limit": 2,
+      "status": "ok",
+      "count": 2,
+      "items": [
+        {"name": "integrated-semantics/flexible-graphrag", "stars": 2},
+        {"name": "rambozambodotdev/zambo-langchain-starter", "stars": 1}
+      ],
+      "limitation": "Public GitLab.com search results reflect this query and snapshot only."
+    },
+    {
+      "provider": "gitlab",
+      "operation": "resolve-and-inspect",
+      "input": "rambozambodotdev/zambo-langchain-starter",
+      "status": "ok",
+      "name": "rambozambodotdev/zambo-langchain-starter",
+      "stars": 1,
+      "stack": ["Python", "LangChain"],
+      "signals": {"tests": false, "ci": false, "docs": true, "examples": false, "deployment": false, "manifest": true},
+      "last_commit_at": "2026-10-26T15:35:32.000+00:00",
+      "latest_release_at": null,
+      "inspection_errors": [],
+      "limitation": "Read metadata, file tree, README, manifest, default-branch commit and releases endpoint. Signals are file-presence observations, not runtime validation; no published release was observed."
+    }
+  ],
+  "offline_tests": {"tests_run": 14, "passed": 13, "skipped": 1, "skip_reason": "Windows environment did not permit creating a symlink; the same regression test runs on hosts that allow it."}
+}

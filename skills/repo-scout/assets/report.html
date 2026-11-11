@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>__REPORT_TITLE__ · Repo Scout</title>
+  <style>__REPORT_STYLE__</style>
+</head>
+<body>
+  <a class="skip-link" href="#results">跳到筛选结果</a>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="Repo Scout 首页"><span class="scout-mark" aria-hidden="true"><i></i><i></i><i></i></span>Repo Scout<span class="edition">开源项目研究笔记</span></a>
+      <div class="top-actions"><span class="snapshot" id="snapshotDate">数据快照 __SNAPSHOT_DATE__</span><button class="button quiet" id="themeButton" type="button" aria-label="切换深色主题">深色</button><button class="button quiet" id="printButton" type="button">打印报告</button></div>
+    </header>
+    <main id="top">
+      <section class="brief" aria-labelledby="reportTitle">
+        <div class="brief-copy"><p class="eyebrow">从需求到证据 / RESEARCH SNAPSHOT</p><h1 id="reportTitle">__REPORT_TITLE__</h1><p class="brief-goal" id="profileGoal"></p><div class="brief-tags" id="profileTags"></div></div>
+        <aside class="reading-note"><p class="note-label">先选适合你的，再看热度</p><p>排名围绕这次学习目标。每个判断保留依据，缺失信息显示为未知；企业规模不会自动获得加分。</p><div class="note-bottom"><span class="evidence-key"></span><span>分数与证据一起阅读</span></div></aside>
+      </section>
+      <div class="research-summary" id="researchSummary" aria-live="polite"></div>
+      <div class="workspace">
+        <aside class="control-panel" aria-label="筛选和评分设置">
+          <div class="panel-heading"><span class="eyebrow">调整研究视角</span><button id="resetButton" class="text-button" type="button">重置</button></div>
+          <label class="field-label" for="searchInput">查找项目或技术栈</label><input id="searchInput" type="search" placeholder="例如 LangChain、Python、RAG" autocomplete="off">
+          <label class="field-label" for="providerFilter">来源</label><select id="providerFilter"><option value="">所有来源</option></select>
+          <label class="field-label" for="audienceFilter">适用对象</label><select id="audienceFilter"><option value="">所有类型</option><option value="individual">个人学习 / 使用</option><option value="team">团队协作</option><option value="enterprise">企业方向</option><option value="unknown">尚未确认</option></select>
+          <div class="weight-title"><h2>评分权重</h2><span>/ 100</span></div>
+          <p class="control-help">拖动后在本页重新排序，不会重新请求网络。</p>
+          <div class="preset-row" aria-label="权重预设"><button class="preset" data-preset="learning" type="button">学习优先</button><button class="preset" data-preset="reuse" type="button">复用优先</button><button class="preset" data-preset="balanced" type="button">均衡</button></div>
+          <div id="weightControls"></div><p id="weightStatus" class="weight-status" aria-live="polite"></p>
+          <details class="method-note"><summary>分数是怎样算的</summary><p>每项判断为 0–5 分，再按权重计算。保守分只累计已有判断；未知项构成上界，不会被描述为零分。排序优先使用保守分，再看证据覆盖度。</p><p>“结构信号”只代表目录或文件存在。“源码核验”代表阅读证据，仍不代表实际运行或生产验收。</p><p id="methodologyText"></p></details>
+        </aside>
+        <section class="results-panel" aria-labelledby="resultHeading">
+          <div class="result-toolbar"><div><p class="eyebrow">候选项目 / SHORTLIST</p><h2 id="resultHeading"><span id="resultCount" role="status" aria-live="polite">0</span> 个项目</h2></div><div class="sort-control"><label for="sortSelect">排序</label><select id="sortSelect"><option value="score">综合保守分</option><option value="stars">Star 数</option><option value="updated">最近代码提交</option></select></div></div>
+          <div class="rail-legend" id="railLegend" aria-label="分数颜色图例"></div>
+          <div id="results" class="results-list" aria-live="polite"></div>
+          <div id="emptyState" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3>没有匹配的候选项目</h3><p>试试缩短关键词，或将来源与适用对象恢复为“所有”。</p><button class="button" id="emptyReset" type="button">清除筛选</button></div>
+          <details class="source-log"><summary id="sourceLogTitle">检索记录与范围</summary><p class="scope-copy">这是一次有边界的检索快照，并不代表覆盖平台上的所有开源项目。明确提供的候选会与检索命中分别标注；失败的来源会明确保留。</p><dl class="facts report-dates"><dt>数据快照</dt><dd id="retrievedDate">__SNAPSHOT_DATE__</dd><dt>仓库核查</dt><dd id="inspectedDate">__INSPECTED_DATE__</dd><dt>报告生成</dt><dd id="generatedDate">__GENERATED_DATE__</dd></dl><div id="sourceLog"></div></details>
+        </section>
+      </div>
+    </main>
+    <footer class="report-footer"><span>Repo Scout · 有依据的开源项目筛选</span><span>报告生成 __GENERATED_DATE__ · 可离线查看</span></footer>
+  </div>
+  <aside id="compareDock" class="compare-dock" aria-label="已选对比项目" hidden><div><strong id="compareCount" role="status" aria-live="polite">0 个项目</strong><span id="compareNames"></span></div><button class="text-button" id="clearCompare" type="button">清空</button><button class="button" id="compareButton" type="button">并排对比</button></aside>
+  <dialog id="compareDialog" aria-labelledby="compareTitle"><div class="dialog-heading"><div><p class="eyebrow">同一把尺子 / SIDE BY SIDE</p><h2 id="compareTitle">项目对比</h2></div><button class="button quiet" id="closeCompare" type="button" aria-label="关闭对比">关闭 ×</button></div><p class="compare-hint">横向对照相同维度；未知项需要进一步核查。</p><div id="compareContent" class="comparison-scroll" tabindex="0" role="region" aria-label="可横向滚动的项目对比表"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p class="no-script">此报告需要 JavaScript 才能显示交互对比。原始数据保存在随附的 report.json 中。</p></noscript>
+  <script id="report-data" type="application/json">__REPORT_DATA__</script>
+  <script>__REPORT_SCRIPT__</script>
+</body>
+</html>

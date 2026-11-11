@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "profile": {
+    "schema_version": 1,
+    "kind": "idea",
+    "title": "LangChain：从入门到应用",
+    "goal": "学习 LangChain，用 Python 做个人 RAG 与工具调用助手，优先可读示例和可复用完整流程",
+    "stack": [
+      "Python",
+      "LangChain"
+    ],
+    "capabilities": [
+      "RAG",
+      "agent"
+    ],
+    "queries": [
+      "LangChain RAG agent Python",
+      "LangChain RAG"
+    ],
+    "target_audience": "individual",
+    "observations": []
+  },
+  "retrieved_at": "2026-11-11T04:57:13.681072+00:00",
+  "queries": [
+    "langchain tutorial in:name,description language:Python",
+    "langchain rag in:name,description language:Python stars:>100",
+    "langchain agent in:name,description language:Python stars:>1000"
+  ],
+  "receipts": [
+    {
+      "provider": "github",
+      "query": "langchain tutorial in:name,description language:Python",
+      "status": "ok",
+      "count": 10,
+      "retrieved_at": "2026-11-11T04:57:06.902680+00:00"
+    },
+    {
+      "provider": "github",
+      "query": "langchain rag in:name,description language:Python stars:>100",
+      "status": "ok",
+      "count": 10,
+      "retrieved_at": "2026-11-11T04:57:09.557437+00:00"
+    },
+    {
+      "provider": "github",
+      "query": "langchain agent in:name,description language:Python stars:>1000",
+      "status": "ok",
+      "count": 10,
+      "retrieved_at": "2026-11-11T04:57:13.680982+00:00"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github:pixegami/langchain-rag-tutorial",
+      "provider": "github",
+      "name": "pixegami/langchain-rag-tutorial",
+      "url": "https://github.com/pixegami/langchain-rag-tutorial",
+      "description": "A simple Langchain RAG application.",
+      "stars": 992,
+      "forks": 518,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-11-13T09:14:54Z",
+      "updated_at": "2026-11-05T00:40:09Z",
+      "pushed_at": "2024-07-31T23:46:44Z",
+      "archived": false,
+      "license": null,
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        },
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:chatchat-space/Langchain-Chatchat",
+      "provider": "github",
+      "name": "chatchat-space/Langchain-Chatchat",
+      "url": "https://github.com/chatchat-space/Langchain-Chatchat",
+      "description": "Langchain-Chatchat（原Langchain-ChatGLM）基于 Langchain 与 ChatGLM, Qwen 与 Llama 等语言模型的 RAG 与 Agent 应用 | Langchain-Chatchat (formerly langchain-ChatGLM), local knowledge based LLM (like ChatGLM, Qwen and Llama) RAG and Agent app with langchain ",
+      "stars": 38713,
+      "forks": 6254,
+      "language": "Python",
+      "topics": [
+        "chatbot",
+        "chatchat",
+        "chatglm",
+        "chatgpt",
+        "embedding",
+        "faiss",
+        "fastchat",
+        "gpt",
+        "knowledge-base",
+        "langchain",
+        "langchain-chatglm",
+        "llama",
+        "llm",
+        "milvus",
+        "ollama",
+        "qwen",
+        "rag",
+        "retrieval-augmented-generation",
+        "streamlit",
+        "xinference"
+      ],
+      "created_at": "2023-03-31T12:12:45Z",
+      "updated_at": "2026-11-11T01:33:40Z",
+      "pushed_at": "2025-11-10T09:27:42Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "default_branch": "master",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        },
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:pixegami/rag-tutorial-v2",
+      "provider": "github",
+      "name": "pixegami/rag-tutorial-v2",
+      "url": "https://github.com/pixegami/rag-tutorial-v2",
+      "description": "An Improved Langchain RAG Tutorial (v2) with local LLMs, database updates, and testing.",
+      "stars": 969,
+      "forks": 602,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2024-04-06T09:27:09Z",
+      "updated_at": "2026-11-11T00:49:17Z",
+      "pushed_at": "2024-08-03T16:41:27Z",
+      "archived": false,
+      "license": null,
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        },
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:didilili/ai-agents-from-zero",
+      "provider": "github",
+      "name": "didilili/ai-agents-from-zero",
+      "url": "https://github.com/didilili/ai-agents-from-zero",
+      "description": " 🚀 2026 最系统的 AI Agent 速成指南｜智能体实战教程 · 完整学习路径  + 实战项目 + 面试题库 · 对标大模型应用开发工程师岗位 · 覆盖LangChain / LangGraph / Coze / Dify / MCP / skills / LLM / RAG / 提示词 · 企业级部署与微调 · 从0到企业级落地 + 从学习到上线项目 + 面试准备一体化 ",
+      "stars": 5937,
+      "forks": 819,
+      "language": "Python",
+      "topics": [
+        "agent",
+        "agent-framework",
+        "agentic-ai",
+        "ai-agent",
+        "aigc",
+        "coze",
+        "cursor",
+        "deepagents",
+        "dify",
+        "gpt",
+        "langchain",
+        "langgraph",
+        "llm",
+        "mcp",
+        "rag",
+        "skills",
+        "tutorial"
+      ],
+      "created_at": "2026-01-29T02:49:11Z",
+      "updated_at": "2026-11-11T04:11:00Z",
+      "pushed_at": "2026-11-06T09:59:44Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        },
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:grumpyp/chroma-langchain-tutorial",
+      "provider": "github",
+      "name": "grumpyp/chroma-langchain-tutorial",
+      "url": "https://github.com/grumpyp/chroma-langchain-tutorial",
+      "description": "The project involves using the Wikipedia API to retrieve current content on a topic, and then using LangChain, OpenAI and Chroma to ask and answer questions about it. The aim of the project is to showcase the powerful embeddings and the endless possibilities.",
+      "stars": 176,
+      "forks": 34,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-04-10T16:54:53Z",
+      "updated_at": "2026-11-04T11:11:35Z",
+      "pushed_at": "2023-04-24T20:59:01Z",
+      "archived": false,
+      "license": null,
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/langchain",
+      "provider": "github",
+      "name": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "description": "The agent engineering platform.",
+      "stars": 149338,
+      "forks": 25104,
+      "language": "Python",
+      "topics": [
+        "agents",
+        "ai",
+        "ai-agents",
+        "anthropic",
+        "chatgpt",
+        "deepagents",
+        "enterprise",
+        "framework",
+        "gemini",
+        "generative-ai",
+        "langchain",
+        "langgraph",
+        "llm",
+        "multiagent",
+        "open-source",
+        "openai",
+        "pydantic",
+        "python",
+        "rag",
+        "typescript"
+      ],
+      "created_at": "2022-10-17T02:58:36Z",
+      "updated_at": "2026-11-11T04:22:32Z",
+      "pushed_at": "2026-11-10T21:33:47Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "master",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:nomic-ai/semantic-search-app-template",
+      "provider": "github",
+      "name": "nomic-ai/semantic-search-app-template",
+      "url": "https://github.com/nomic-ai/semantic-search-app-template",
+      "description": "Tutorial and template for a semantic search app powered by the Atlas Embedding Database, Langchain,  OpenAI and FastAPI",
+      "stars": 115,
+      "forks": 25,
+      "language": "Python",
+      "topics": [
+        "fastapi",
+        "openai",
+        "react",
+        "semantic-search",
+        "tutorial"
+      ],
+      "created_at": "2023-03-20T15:07:18Z",
+      "updated_at": "2026-07-01T18:14:59Z",
+      "pushed_at": "2023-09-12T04:39:36Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/langgraph",
+      "provider": "github",
+      "name": "langchain-ai/langgraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Build resilient agents.",
+      "stars": 44774,
+      "forks": 7713,
+      "language": "Python",
+      "topics": [
+        "agents",
+        "ai",
+        "ai-agents",
+        "chatgpt",
+        "deepagents",
+        "enterprise",
+        "framework",
+        "gemini",
+        "generative-ai",
+        "langchain",
+        "langgraph",
+        "llm",
+        "multiagent",
+        "open-source",
+        "openai",
+        "pydantic",
+        "python",
+        "rag"
+      ],
+      "created_at": "2023-08-09T18:33:12Z",
+      "updated_at": "2026-11-11T04:43:49Z",
+      "pushed_at": "2026-11-11T04:45:40Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:parallel75/AI_Agent",
+      "provider": "github",
+      "name": "parallel75/AI_Agent",
+      "url": "https://github.com/parallel75/AI_Agent",
+      "description": "LangChain Tutorial 3  动画演示透彻解释 Agent 概念 以及 实现Demo ",
+      "stars": 108,
+      "forks": 35,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-10-02T14:35:43Z",
+      "updated_at": "2026-10-21T09:02:16Z",
+      "pushed_at": "2023-10-03T03:39:05Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:Shy2593666979/AgentChat",
+      "provider": "github",
+      "name": "Shy2593666979/AgentChat",
+      "url": "https://github.com/Shy2593666979/AgentChat",
+      "description": "AgentChat 是一个基于 LLM 的智能体交流平台，内置默认 Agent 并支持用户自定义 Agent。通过多轮对话和任务协作，Agent 可以理解并协助完成复杂任务。项目集成 LangChain、Function Call、MCP 协议、RAG、Memory、HITL、Skill、Milvus 和 ElasticSearch 等技术，实现高效的知识检索与工具调用，使用 FastAPI 构建高性能后端服务。",
+      "stars": 934,
+      "forks": 116,
+      "language": "Python",
+      "topics": [
+        "ag-ui",
+        "agent",
+        "agent-memory",
+        "agent-skills",
+        "harness-engineering",
+        "human-in-the-loop",
+        "langchain",
+        "mcp"
+      ],
+      "created_at": "2024-08-20T16:00:12Z",
+      "updated_at": "2026-11-10T16:26:35Z",
+      "pushed_at": "2026-10-17T17:49:16Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/deepagents",
+      "provider": "github",
+      "name": "langchain-ai/deepagents",
+      "url": "https://github.com/langchain-ai/deepagents",
+      "description": "The batteries-included agent harness.",
+      "stars": 31184,
+      "forks": 4406,
+      "language": "Python",
+      "topics": [
+        "ai",
+        "deepagents",
+        "harness",
+        "harness-engineering",
+        "langchain",
+        "langgraph",
+        "python",
+        "typescript"
+      ],
+      "created_at": "2025-07-27T23:07:53Z",
+      "updated_at": "2026-11-11T04:38:58Z",
+      "pushed_at": "2026-11-11T04:40:04Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:edrickdch/chat-pdf",
+      "provider": "github",
+      "name": "edrickdch/chat-pdf",
+      "url": "https://github.com/edrickdch/chat-pdf",
+      "description": "This tutorial goes over the architecture and concepts used for easily chatting with your PDF using LangChain, ChromaDB and OpenAI's API",
+      "stars": 69,
+      "forks": 34,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-05-17T03:12:33Z",
+      "updated_at": "2026-07-03T19:33:36Z",
+      "pushed_at": "2023-09-24T16:45:58Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "master",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:LibreChat-AI/rag-api",
+      "provider": "github",
+      "name": "LibreChat-AI/rag-api",
+      "url": "https://github.com/LibreChat-AI/rag-api",
+      "description": "ID-based RAG FastAPI: Integration with Langchain and PostgreSQL/pgvector",
+      "stars": 924,
+      "forks": 415,
+      "language": "Python",
+      "topics": [
+        "api",
+        "api-rest",
+        "embeddings",
+        "fastapi",
+        "langchain",
+        "pgvector",
+        "postgresql",
+        "psql",
+        "python",
+        "rag",
+        "vector",
+        "vector-database"
+      ],
+      "created_at": "2024-03-17T12:20:35Z",
+      "updated_at": "2026-11-10T04:47:25Z",
+      "pushed_at": "2026-10-23T13:37:24Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/open-swe",
+      "provider": "github",
+      "name": "langchain-ai/open-swe",
+      "url": "https://github.com/langchain-ai/open-swe",
+      "description": "An Open-Source Asynchronous Coding Agent",
+      "stars": 11197,
+      "forks": 1318,
+      "language": "Python",
+      "topics": [
+        "agent",
+        "agents",
+        "ai",
+        "anthropic",
+        "claudecode",
+        "llm",
+        "llms",
+        "openai"
+      ],
+      "created_at": "2025-05-21T21:44:24Z",
+      "updated_at": "2026-11-11T04:37:45Z",
+      "pushed_at": "2026-11-11T04:23:48Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:leonvanzyl/langchain-python-tutorial",
+      "provider": "github",
+      "name": "leonvanzyl/langchain-python-tutorial",
+      "url": "https://github.com/leonvanzyl/langchain-python-tutorial",
+      "description": "",
+      "stars": 60,
+      "forks": 20,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2024-01-16T12:06:48Z",
+      "updated_at": "2026-10-15T13:28:59Z",
+      "pushed_at": "2024-02-12T05:58:56Z",
+      "archived": false,
+      "license": null,
+      "default_branch": "lesson-1",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:icey1287/SuperMew",
+      "provider": "github",
+      "name": "icey1287/SuperMew",
+      "url": "https://github.com/icey1287/SuperMew",
+      "description": "SuperMew — Agentic RAG with LangChain & LangGraph",
+      "stars": 913,
+      "forks": 170,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2025-12-12T11:12:20Z",
+      "updated_at": "2026-11-09T14:59:26Z",
+      "pushed_at": "2026-10-07T06:35:44Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:AgentOps-AI/agentops",
+      "provider": "github",
+      "name": "AgentOps-AI/agentops",
+      "url": "https://github.com/AgentOps-AI/agentops",
+      "description": "Python SDK for AI agent monitoring, LLM cost tracking, benchmarking, and more. Integrates with most LLMs and agent frameworks including CrewAI, Agno, OpenAI Agents SDK, Langchain, Autogen, AG2, and CamelAI",
+      "stars": 5954,
+      "forks": 662,
+      "language": "Python",
+      "topics": [
+        "agent",
+        "agentops",
+        "agents-sdk",
+        "ai",
+        "anthropic",
+        "autogen",
+        "cost-estimation",
+        "crewai",
+        "evals",
+        "evaluation-metrics",
+        "groq",
+        "langchain",
+        "llm",
+        "mistral",
+        "ollama",
+        "openai",
+        "openai-agents"
+      ],
+      "created_at": "2023-08-15T23:26:23Z",
+      "updated_at": "2026-11-10T13:18:24Z",
+      "pushed_at": "2026-06-25T08:25:03Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:parallel75/AI_GirlFriend",
+      "provider": "github",
+      "name": "parallel75/AI_GirlFriend",
+      "url": "https://github.com/parallel75/AI_GirlFriend",
+      "description": "LangChain Tutorial 2 实现 AI 女友 Demo",
+      "stars": 57,
+      "forks": 23,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-09-21T12:00:26Z",
+      "updated_at": "2026-10-18T16:08:36Z",
+      "pushed_at": "2023-09-22T02:14:52Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:Annyfee/agent-craft",
+      "provider": "github",
+      "name": "Annyfee/agent-craft",
+      "url": "https://github.com/Annyfee/agent-craft",
+      "description": "AI Agent 教学仓库 | 系统化 LangChain、RAG、LangGraph、MCP 全栈实战代码 | 万字博客详解 | 开源可运行示例 | 从零构建智能体",
+      "stars": 537,
+      "forks": 75,
+      "language": "Python",
+      "topics": [
+        "ai-agent",
+        "artificial-intelligence",
+        "beginner-guide",
+        "chatbot",
+        "deepseek",
+        "langchain",
+        "langgraph",
+        "mcp",
+        "multi-agent",
+        "openai",
+        "python",
+        "rag",
+        "tutorial"
+      ],
+      "created_at": "2025-10-23T09:29:06Z",
+      "updated_at": "2026-11-10T06:21:55Z",
+      "pushed_at": "2026-10-27T01:50:17Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/streamlit-agent",
+      "provider": "github",
+      "name": "langchain-ai/streamlit-agent",
+      "url": "https://github.com/langchain-ai/streamlit-agent",
+      "description": "Reference implementations of several LangChain agents as Streamlit apps",
+      "stars": 1645,
+      "forks": 721,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-06-13T04:15:45Z",
+      "updated_at": "2026-11-10T23:02:07Z",
+      "pushed_at": "2024-08-04T14:55:12Z",
+      "archived": true,
+      "license": "Apache-2.0",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:krishnaik06/Langchain-Tutorials",
+      "provider": "github",
+      "name": "krishnaik06/Langchain-Tutorials",
+      "url": "https://github.com/krishnaik06/Langchain-Tutorials",
+      "description": "",
+      "stars": 54,
+      "forks": 59,
+      "language": "Python",
+      "topics": [],
+      "created_at": "2023-06-13T16:03:07Z",
+      "updated_at": "2026-10-17T10:18:45Z",
+      "pushed_at": "2024-03-27T13:13:48Z",
+      "archived": false,
+      "license": null,
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:RMA-MUN/RAGNotebook",
+      "provider": "github",
+      "name": "RMA-MUN/RAGNotebook",
+      "url": "https://github.com/RMA-MUN/RAGNotebook",
+      "description": "基于LangChain、LangGraph、FastAPI和React的RAG项目，主分支为基于知识图谱的知识管理平台，base-rag分支为完整的向量RAG项目供学习使用",
+      "stars": 486,
+      "forks": 85,
+      "language": "Python",
+      "topics": [
+        "fastapi",
+        "graphrag",
+        "knowledge-graph",
+        "langchain",
+        "mysql",
+        "neo4j",
+        "rag",
+        "react",
+        "sqlachemy"
+      ],
+      "created_at": "2026-03-06T08:43:18Z",
+      "updated_at": "2026-11-10T10:02:18Z",
+      "pushed_at": "2026-10-31T11:47:00Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "master",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:langchain-ai/langgraph-swarm-py",
+      "provider": "github",
+      "name": "langchain-ai/langgraph-swarm-py",
+      "url": "https://github.com/langchain-ai/langgraph-swarm-py",
+      "description": "For your multi-agent needs",
+      "stars": 1593,
+      "forks": 228,
+      "language": "Python",
+      "topics": [
+        "agents",
+        "langgraph",
+        "llms",
+        "multiagent",
+        "multiagent-systems",
+        "python"
+      ],
+      "created_at": "2025-02-19T15:50:25Z",
+      "updated_at": "2026-11-10T08:01:48Z",
+      "pushed_at": "2026-10-28T17:30:18Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:estelledc/langchain-langgraph-langsmith-tutorial",
+      "provider": "github",
+      "name": "estelledc/langchain-langgraph-langsmith-tutorial",
+      "url": "https://github.com/estelledc/langchain-langgraph-langsmith-tutorial",
+      "description": "LangChain + LangGraph + LangSmith 入门教程实践",
+      "stars": 38,
+      "forks": 0,
+      "language": "Python",
+      "topics": [
+        "langchain",
+        "langgraph",
+        "langsmith",
+        "tutorial"
+      ],
+      "created_at": "2026-03-14T12:41:52Z",
+      "updated_at": "2026-11-06T07:30:19Z",
+      "pushed_at": "2026-07-28T15:00:16Z",
+      "archived": false,
+      "license": "NOASSERTION",
+      "default_branch": "master",
+      "retrieved_at": "2026-11-11T04:57:06Z",
+      "discovery": [
+        {
+          "query": "langchain tutorial in:name,description language:Python",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:leonyangdev/lc-studylab",
+      "provider": "github",
+      "name": "leonyangdev/lc-studylab",
+      "url": "https://github.com/leonyangdev/lc-studylab",
+      "description": "LC-StudyLab 是一个完整演示 LangChain v1.0 全家桶能力的开源项目，整合了 LangGraph、DeepAgents、RAG 检索增强生成、Guardrails 安全校验与流式输出智能体等核心特性，帮助开发者系统掌握 LangChain v1 的所有关键组件",
+      "stars": 406,
+      "forks": 82,
+      "language": "Python",
+      "topics": [
+        "langchain",
+        "langgraph"
+      ],
+      "created_at": "2025-11-05T10:01:46Z",
+      "updated_at": "2026-10-29T08:14:15Z",
+      "pushed_at": "2025-12-09T14:11:37Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:09Z",
+      "discovery": [
+        {
+          "query": "langchain rag in:name,description language:Python stars:>100",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "id": "github:fetchai/innovation-lab-examples",
+      "provider": "github",
+      "name": "fetchai/innovation-lab-examples",
+      "url": "https://github.com/fetchai/innovation-lab-examples",
+      "description": "80+ production-ready AI agent examples in Python — build autonomous agents, multi-agent systems and agentic AI with uAgents, ASI:One, MCP, A2A, LangChain, CrewAI, Gemini, Claude and OpenAI.",
+      "stars": 1171,
+      "forks": 85,
+      "language": "Python",
+      "topics": [
+        "a2a-protocol",
+        "agentic-ai",
+        "agentverse",
+        "ai-agent",
+        "ai-agent-examples",
+        "ai-agent-framework",
+        "ai-agents",
+        "asi-one",
+        "autonomous-agents",
+        "crewai",
+        "examples",
+        "fetchai",
+        "langchain",
+        "llm-agents",
+        "mcp",
+        "model-context-protocol",
+        "multi-agent-systems",
+        "openai",
+        "python",
+        "uagents"
+      ],
+      "created_at": "2025-06-16T08:07:28Z",
+      "updated_at": "2026-11-08T08:40:34Z",
+      "pushed_at": "2026-09-01T15:08:56Z",
+      "archived": false,
+      "license": "MIT",
+      "default_branch": "main",
+      "retrieved_at": "2026-11-11T04:57:13Z",
+      "discovery": [
+        {
+          "query": "langchain agent in:name,description language:Python stars:>1000",
+          "type": "search"
+        }
+      ]
+    }
+  ]
+}

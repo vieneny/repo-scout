@@ -1,0 +1,12 @@
+{
+  "sources": ["github"],
+  "weights": {
+    "relevance": 25,
+    "stack_fit": 15,
+    "completeness": 15,
+    "maintenance": 10,
+    "learning_fit": 15,
+    "reuse": 15,
+    "popularity": 5
+  }
+}

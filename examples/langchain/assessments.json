@@ -1,0 +1,669 @@
+{
+  "schema_version": 1,
+  "assessments": [
+    {
+      "id": "github:leonyangdev/lc-studylab",
+      "summary": "中文分阶段的 LangChain v1 学习平台：从工具 Agent 到 FAISS RAG，再到工作流与前端，适合作为较完整的学习主线。",
+      "category": "tutorial",
+      "audience": {
+        "label": "individual",
+        "reason": "有阶段化中文说明、CLI 和模块化示例，适合个人逐步学习；README 的生产级表述未经过本次运行、安全或规模验收。",
+        "evidence": [
+          "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/README.md",
+          "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/agents/base_agent.py"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 5,
+          "reason": "基础 Agent 实际调用 create_agent，RAG Agent 将知识库检索封装为工具，覆盖个人 RAG 与工具助手两项核心需求。",
+          "evidence": [
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/agents/base_agent.py",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/rag/rag_agent.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 5,
+          "reason": "Python 后端固定 LangChain1.0.3、LangGraph1.0.2，源码使用 create_agent；另有 FastAPI、FAISS 与 Next.js 前端。版本为此仓库声明版本，不代表当前最新。",
+          "evidence": [
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/requirements.txt",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/agents/base_agent.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 3.5,
+          "reason": "静态读取发现 Agent、RAG 索引生命周期和调用入口，结构中有测试脚本、前后端与容器清单；没有执行测试、检索或部署，不能把文件存在当作通过验收。",
+          "evidence": [
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/rag/index_manager.py",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/rag/rag_agent.py",
+            "https://github.com/leonyangdev/lc-studylab/tree/996c23719ae55e26a95298f75a7aecdc0b321411"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 4.5,
+          "reason": "README 分五阶段给出中文路径与示例，Agent/RAG 各自有清晰模块边界；全栈和后续高级模块比最小示例复杂，适合从第一、二阶段开始。",
+          "evidence": [
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/README.md",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/agents/base_agent.py",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/rag/index_manager.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 4,
+          "reason": "MIT 允许按许可证条件复用，索引管理和 Agent 模块可分别参考；固定的框架版本、后端 config 依赖及完整前端仍需适配目标工程。",
+          "evidence": [
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/LICENSE",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/rag/index_manager.py",
+            "https://github.com/leonyangdev/lc-studylab/blob/996c23719ae55e26a95298f75a7aecdc0b321411/backend/requirements.txt"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "中文渐进路线同时覆盖工具调用与 RAG，适合作为学习主线。",
+        "有 FAISS 索引管理、CLI/API 与前端的结构参考。",
+        "Agent 源码使用 LangChain v1 create_agent，依赖版本明确。"
+      ],
+      "gaps": [
+        "默认分支最后提交为2025-11-19；2026年的仓库更新时间不能代表代码持续维护。",
+        "README 克隆地址指向 hefeng6500，和当前 leonyangdev 仓库不一致，照抄前需校正。",
+        "本次未执行测试或模型调用；不能据 README 的生产级宣称判定企业就绪。"
+      ],
+      "learning_path": [
+        "先读 backend/agents/base_agent.py，理解 create_agent、消息与工具。",
+        "再跟踪 backend/rag/index_manager.py → rag_agent.py，理解索引、检索与工具封装。",
+        "最后参考 FastAPI 路由与前端；LangGraph、DeepAgents、Guardrails 按需扩展。"
+      ]
+    },
+    {
+      "id": "github:pixegami/rag-tutorial-v2",
+      "summary": "只有少量文件的 PDF→分块→Chroma→检索问答教程，适合快速理解 RAG 数据流；复现前需处理旧 API、模型配置与许可证缺失。",
+      "category": "tutorial",
+      "audience": {
+        "label": "individual",
+        "reason": "脚本式教学案例、无服务化部署和多用户结构，适合个人阅读与实验；不是已验证的团队或企业应用。",
+        "evidence": [
+          "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/populate_database.py",
+          "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/query_data.py"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 3.5,
+          "reason": "实现了完整可追踪的 RAG 主链与来源输出，但没有自主工具调用 Agent；对应本需求的 RAG 入门部分。",
+          "evidence": [
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/populate_database.py",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/query_data.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 3,
+          "reason": "Python/LangChain/Chroma 与目标一致，但仍导入 langchain.vectorstores、langchain.document_loaders 等旧路径，requirements 未固定版本；直接安装当前 LangChain 需做兼容确认。",
+          "evidence": [
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/requirements.txt",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/populate_database.py",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/query_data.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 3,
+          "reason": "源码具备增量索引、检索、生成和两个模型判分测试示例，形成窄范围 RAG 流程；没有服务层/CI，且外部模型依赖未运行验证。",
+          "evidence": [
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/populate_database.py",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/query_data.py",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/test_rag.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 3.5,
+          "reason": "脚本短、分块与检索数据流直观；README 仅一行标题，嵌入函数默认走 AWS Bedrock、回答走 Ollama，新手仍需自行补环境配置。",
+          "evidence": [
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/README.md",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/get_embedding_function.py",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/query_data.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": null,
+          "reason": "完整九文件树中没有许可证文件，平台许可证元数据为空；技术结构可阅读参考，但无法确认复制分发的授权条件，因此复用评分保留未知。",
+          "evidence": [
+            "https://github.com/pixegami/rag-tutorial-v2/tree/5e71164a3ab0f78e734e0d79b8c82d4954197fc7",
+            "https://github.com/pixegami/rag-tutorial-v2/blob/5e71164a3ab0f78e734e0d79b8c82d4954197fc7/populate_database.py"
+          ],
+          "status": "unknown"
+        }
+      },
+      "strengths": [
+        "少量脚本便于画出 RAG 主流程，新增文档去重和来源输出也能直接跟踪。",
+        "有模型判分式测试示例，能帮助理解 RAG 评估思路。"
+      ],
+      "gaps": [
+        "默认分支最后提交为2024-05-11；依赖无版本锁定，源码仍用旧版 LangChain 导入路径。",
+        "README 缺少安装步骤；默认 Bedrock 嵌入需要 AWS 配置，生成模型使用 Ollama mistral。",
+        "许可证未确认，复用值保留未知；测试依赖真实模型且本次未执行。",
+        "不包含工具调用 Agent、账号权限或部署工程化。"
+      ],
+      "learning_path": [
+        "先读 populate_database.py，画出加载→分块→持久化与增量去重。",
+        "再读 query_data.py，跟踪相似检索→上下文→提示词→模型→来源。",
+        "理解 test_rag.py 的模型判分局限；若要运行，先确定依赖兼容版本、模型和授权条件。"
+      ]
+    },
+    {
+      "id": "github:Annyfee/agent-craft",
+      "summary": "中文章节式 Agent 教学集合，从工具调用、LCEL RAG 到 LangGraph/MCP/Streamlit；适合循序学习，需区分教学脚本与可维护应用。",
+      "category": "tutorial",
+      "audience": {
+        "label": "individual",
+        "reason": "章节脚本、示例知识库和中文课程路径面向个人自学；CI 的语法与 lint 检查不能证明业务流程可用。",
+        "evidence": [
+          "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/README.md",
+          "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/.github/workflows/ci.yml"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 5,
+          "reason": "有工具调用 Agent、基础 RAG 完整链与 RAG-as-tool 章节，正好覆盖需求中的检索与工具助手，并提供 LangGraph 后续路线。",
+          "evidence": [
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m05_langchain_advanced/s02_general_agent.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m06_rag_basics/s04_rag_chain_full.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m07_rag_advanced/s04_rag_as_tool.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 4.5,
+          "reason": "requirements 固定 LangChain1.2.0、LangGraph1.0.5，Python+FAISS/Chroma；部分 Agent/检索教学显式使用 langchain_classic，学习时需和新 create_agent 路径区分。",
+          "evidence": [
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/requirements.txt",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m05_langchain_advanced/s02_general_agent.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m07_rag_advanced/s04_rag_as_tool.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 3,
+          "reason": "基础 RAG 脚本含知识生成、分块、向量索引与问答，进阶章节有 RAG 工具封装；CI 只做 compileall/flake8，未见本次所读流程的自动业务验收。",
+          "evidence": [
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m06_rag_basics/s04_rag_chain_full.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m07_rag_advanced/s04_rag_as_tool.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/.github/workflows/ci.yml"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 4.5,
+          "reason": "中文按章节拆分、原理与代码路径清晰，可从工具调用顺序进入 RAG；存在模拟天气、教学内存及经典 API 路线，需要主动区分真实集成和演示。",
+          "evidence": [
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/README.md",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m05_langchain_advanced/s02_general_agent.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m04_langchain_basics/s04_memory.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 3.5,
+          "reason": "MIT 可按条件复用，RAG 链条封装可借鉴；多个脚本导入时即配置模型、建库或调用模型，路径与模型配置固定，落入真实工程前需拆分副作用并补测试。",
+          "evidence": [
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/LICENSE",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m06_rag_basics/s04_rag_chain_full.py",
+            "https://github.com/Annyfee/agent-craft/blob/d2130ccfcb437bb75780c8e885be2e4c11747f2a/m07_rag_advanced/s04_rag_as_tool.py"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "工具调用→RAG→LangGraph 的中文学习顺序明确。",
+        "示例给出 LCEL 链、向量存储与检索工具封装的具体代码。",
+        "依赖固定版本，并明确使用 langchain_classic 兼容教学组件。"
+      ],
+      "gaps": [
+        "CI 实际是语法与 lint 检查，不能当作模型/API 或端到端测试通过。",
+        "部分工具是模拟结果，部分对话记忆只存在进程内存；不能直接视作企业能力。",
+        "若干脚本在模块顶层建库、下载模型或发起调用，复用需重构初始化和入口。",
+        "初次自动树采集失败；本次另行读取固定提交的完整树和关键源码，没有执行候选项目。"
+      ],
+      "learning_path": [
+        "先读 m03/m05 理解工具 schema 与 Agent 执行，注意经典 API 与 v1 API 差异。",
+        "跟读 m06 的完整 RAG 链，再读 m07 的 Chroma、reranker 和工具封装。",
+        "按需学习 m08/m09 的状态图，再参考 Streamlit；将模型配置和顶层调用拆为可测试模块。"
+      ]
+    },
+    {
+      "id": "github:RMA-MUN/RAGNotebook",
+      "summary": "围绕笔记与知识库的完整应用参考，具有 Agentic RAG、用户鉴权、持久化和前端；更适合完成基础后学习真实工程分层。",
+      "category": "application",
+      "audience": {
+        "label": "individual",
+        "reason": "README 明确面向个人知识管理与项目学习；具备多用户/持久化源码但本次未做权限隔离、安全、容量或运行验收，不据此认证企业就绪。",
+        "evidence": [
+          "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/README.md",
+          "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/utils/auth_utils.py",
+          "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/docker-compose.yml"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 4.5,
+          "reason": "实际 Agent 工厂绑定笔记/RAG 工具，AgenticRagService 将规划、本地检索、可回答性判断和联网补充串起，贴合个人知识助手。业务笔记功能也带来额外复杂度。",
+          "evidence": [
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/agent/agent.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/rag/agentic_rag/service.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 5,
+          "reason": "Python>=3.12、LangChain1.2.13/FastAPI，源码使用 create_agent；另有 SQLAlchemy、Redis、Neo4j 及 React/Vite 前端，符合 Python LangChain 主线。",
+          "evidence": [
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/pyproject.toml",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/agent/agent.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/front/package.json"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 4,
+          "reason": "静态阅读到 Agent、RAG服务、JWT鉴权、MySQL检查点，以及带假模型的真实 Agent/RAG 集成测试；CI配置 pytest和前端构建，Compose配置基础设施。仅源码审阅，未确认这些检查当前通过。",
+          "evidence": [
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/agent/agent.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/utils/auth_utils.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/tests/agent/test_agent_rag_integration.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/.github/workflows/ci.yml"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 3.5,
+          "reason": "业务分层和可注入 RAG 服务适合学习工程化与测试，但默认主线已是知识图谱笔记应用，依赖 MySQL/Redis/Neo4j 和较重解析依赖，初学成本明显高于单脚本教程。",
+          "evidence": [
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/README.md",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/docker-compose.yml",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/pyproject.toml",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/rag/agentic_rag/service.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 4,
+          "reason": "MIT、可注入的 RAG 组件与假模型集成测试具有借鉴价值；Agent 与用户/笔记/会话/数据库耦合，直接移植需适配数据模型与基础设施。",
+          "evidence": [
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/LICENSE",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/rag/agentic_rag/service.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/app/agent/agent.py",
+            "https://github.com/RMA-MUN/RAGNotebook/blob/8cc12710fb365d09185757df97f0f1a4a4f057be/backend/tests/agent/test_agent_rag_integration.py"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "展示了个人知识助手的 API、Agent、RAG、鉴权、持久化和前端分层。",
+        "有假模型驱动的 Agent/RAG 集成测试源码，可学习不依赖真实模型的测试设计。",
+        "Agentic RAG 的规划、检索、评估与补充检索边界清晰。"
+      ],
+      "gaps": [
+        "本次未运行数据库、模型、测试或前端；源码存在不等于可直接部署通过。",
+        "Compose 需要 MySQL、Redis、Neo4j；默认解析依赖组较重，个人学习资源成本更高。",
+        "当前 master 是笔记/GraphRAG应用；README 推荐的 base-rag 简化分支未在本次评估。",
+        "没有进行企业权限隔离、安全、吞吐或可用性验收。"
+      ],
+      "learning_path": [
+        "先读 backend/app/agent/agent.py 和 agentic_rag/service.py，画出业务与检索边界。",
+        "结合 test_agent_rag_integration.py 学习假模型和工具执行的集成测试。",
+        "最后研究 auth_utils、MySQL 检查点和前端，再决定是否承担整套基础设施；简化分支另行评估。"
+      ]
+    },
+    {
+      "id": "github:langchain-ai/langchain",
+      "summary": "官方组件与 Agent 框架，适合核对现代 API，再按需学习内部抽象。",
+      "category": "framework",
+      "audience": {
+        "label": "individual",
+        "reason": "个人可用包级 API 开始；仓库本身是大型多包框架，并非可直接交付的个人知识库应用。",
+        "evidence": [
+          "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+          "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+          "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 4.5,
+          "reason": "create_agent 实现模型与工具循环，并提供状态、结构化输出和检查点接口；贴合工具助手。完整个人 RAG 产品仍需补数据与检索流程。",
+          "evidence": [
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 5,
+          "reason": "langchain 1.4.10 声明 Python>=3.10、langchain-core 1.x 与 LangGraph 1.x；factory.py 直接集成 BaseChatModel、BaseTool、StateGraph。",
+          "evidence": [
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 4.5,
+          "reason": "已读 Agent 工厂实现、依赖清单与官方文档入口；检查点、工具路由和中间件均有接口。该分数指框架范围完整性，未执行测试或集成验收。",
+          "evidence": [
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 3.5,
+          "reason": "README 提供极小调用起点，API 文档与概念资料齐全；factory.py 含复杂泛型、重载和中间件组合，初学者不宜从整库源码开始。",
+          "evidence": [
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 4.5,
+          "reason": "MIT 与模型/工具抽象便于按包复用；直接依赖稳定公开接口比复制内部工厂更合理，模型供应商和检索组件仍需自行选择。",
+          "evidence": [
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/pyproject.toml",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/libs/langchain_v1/langchain/agents/factory.py",
+            "https://github.com/langchain-ai/langchain/blob/c6ec96a74b97d3c057c14e93129a5b3e53a961ff/README.md"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "现代 LangChain API 的一手依据",
+        "可从包级快速调用逐步深入工具循环",
+        "MIT；组件接口明确"
+      ],
+      "gaps": [
+        "不是现成 RAG 应用，需自行接入文档与向量存储",
+        "官方 README 的生产能力描述没有被本案例运行验证",
+        "大型仓库直接通读成本高"
+      ],
+      "learning_path": [
+        "先阅读 README 与官方 Models/Tools 文档",
+        "从 create_agent 的工具调用接口入手",
+        "只追踪需要的中间件与检查点边界"
+      ]
+    },
+    {
+      "id": "github:langchain-ai/langgraph",
+      "summary": "状态图与持久化工作流基础，适合掌握基本 RAG 后进阶。",
+      "category": "framework",
+      "audience": {
+        "label": "team",
+        "reason": "个人可写小图，但核心价值偏向长流程、状态恢复与多节点编排；团队复杂工作流更能发挥其优势。",
+        "evidence": [
+          "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+          "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+          "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 3.5,
+          "reason": "StateGraph 读写共享状态并 compile 为 invoke/stream 图，直接支持 Agent 编排；与 LangChain 入门/RAG 主目标相关，但不是开箱即用的检索助手。",
+          "evidence": [
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 4.5,
+          "reason": "Python>=3.10，依赖 langchain-core、checkpoint、prebuilt、Pydantic；目标 Python 栈契合，图模型比普通链增加一层抽象。",
+          "evidence": [
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 4.5,
+          "reason": "已核对 StateGraph 实现及节点、边、reducer、compile 示例，依赖中有检查点包和独立测试组；这是编排框架的静态完整性，未验证恢复可靠性。",
+          "evidence": [
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 2.5,
+          "reason": "StateGraph 自带小型示例，但需理解 reducer、状态模式、图编译和持久化；对先做个人 RAG 的初学者认知成本高于窄功能示例。",
+          "evidence": [
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 4.5,
+          "reason": "MIT、可独立使用；适合复用图编排与检查点接口。简单单轮 RAG 使用它可能增加不必要的迁移和状态建模工作。",
+          "evidence": [
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/pyproject.toml",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/libs/langgraph/langgraph/graph/state.py",
+            "https://github.com/langchain-ai/langgraph/blob/5ea88ecbcdb9fde713c3abd58850a5b7beaa24ec/README.md"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "状态/节点/编译边界清楚",
+        "适合后续学习持久化与人工介入",
+        "独立库与检查点接口可组合"
+      ],
+      "gaps": [
+        "不是 RAG 业务应用",
+        "数据库检查点、并发与故障恢复未实测",
+        "图与状态抽象增加入门负担"
+      ],
+      "learning_path": [
+        "先做通一个最小检索问答",
+        "阅读 StateGraph 内嵌单节点示例",
+        "再增加条件路由与持久化检查点"
+      ]
+    },
+    {
+      "id": "github:langchain-ai/streamlit-agent",
+      "summary": "短小的可视化聊天、检索与工具示例，适合借鉴界面；API 时代较旧。",
+      "category": "tutorial",
+      "audience": {
+        "label": "individual",
+        "reason": "示例由独立 Streamlit 脚本组成，个人可逐个理解；需要模型密钥和部分本地依赖，未见多租户企业产品边界。",
+        "evidence": [
+          "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+          "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+          "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+          "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 4.5,
+          "reason": "chat_with_documents.py 串起 PDF、切分、向量检索、会话记忆和流式回答；search_and_chat.py 演示搜索工具调用，覆盖两项核心学习目标。",
+          "evidence": [
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 4,
+          "reason": "Python、Streamlit、LangChain、HuggingFaceEmbeddings、DocArray；但文档示例仍用 langchain.chat_models 等旧导入，依赖约束组合并非现代 LangChain 1.x 路线。",
+          "evidence": [
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 3,
+          "reason": "两个业务脚本有可读主流程、上传和回调，README 有 Poetry/Docker 步骤；没有据此确认现代环境可安装运行，也不是包含权限/运营的完整产品。",
+          "evidence": [
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 4,
+          "reason": "百行级脚本按上传、切分、检索、生成分段，便于观察 UI 与流式过程；旧 ConversationalRetrievalChain/ConversationalChatAgent 会带来版本迁移成本。",
+          "evidence": [
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 3,
+          "reason": "Apache-2.0；可借鉴流式展示、会话记录和检索回调的结构。代码最近默认分支提交为2024年，依赖/API需先迁移，不宜直接整包复用到新项目。",
+          "evidence": [
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/pyproject.toml",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/chat_with_documents.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/streamlit_agent/search_and_chat.py",
+            "https://github.com/langchain-ai/streamlit-agent/blob/634e1cecf23d7ca3a4c5e708944673e057765b2a/README.md"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "RAG 与搜索工具示例独立且直观",
+        "流式输出与检索来源回调易学习",
+        "Apache-2.0"
+      ],
+      "gaps": [
+        "默认分支最后提交为2024-02-08",
+        "新装依赖兼容性未运行验证",
+        "旧 Agent/Chain API 应对照官方文档迁移"
+      ],
+      "learning_path": [
+        "先读 chat_with_documents.py 的检索流程",
+        "分离 Streamlit 展示与检索逻辑",
+        "用当前 LangChain API 重写后再尝试运行"
+      ]
+    },
+    {
+      "id": "github:chatchat-space/Langchain-Chatchat",
+      "summary": "包含知识库、API、WebUI 与多模型接入的应用，适合研究模块划分。",
+      "category": "application",
+      "audience": {
+        "label": "team",
+        "reason": "服务端、SDK、WebUI、知识库元数据和模型服务有多个运行边界，更适合团队研究完整应用；个人可以拆模块学习，不能据此认定企业生产就绪。",
+        "evidence": [
+          "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+          "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+          "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+          "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+          "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py"
+        ]
+      },
+      "criteria": {
+        "relevance": {
+          "value": 5,
+          "reason": "KBService 实现文件入库/删除与向量服务抽象，本地知识库被注册成工具；AgentExecutor 有工具循环，覆盖 RAG+工具助手与完整应用参考目标。",
+          "evidence": [
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "stack_fit": {
+          "value": 4,
+          "reason": "Python/FastAPI/Streamlit/SQLAlchemy/FAISS，服务端明确固定 langchain==0.1.17 和 community==0.0.36；技术方向匹配但并非现代1.x教学路线。",
+          "evidence": [
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "completeness": {
+          "value": 4,
+          "reason": "已读知识库服务、工具注册、Agent 循环与知识库 API 测试；功能有具体实现且服务分层较全。测试仅静态阅读，未确认安装、模型接入或端到端成功。",
+          "evidence": [
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "learning_fit": {
+          "value": 2,
+          "reason": "业务覆盖多但依赖和模型服务较重；Python约束>=3.10,<3.12，与README的宽泛版本描述不同，初学者整套搭建成本高。",
+          "evidence": [
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py"
+          ],
+          "status": "source-reviewed"
+        },
+        "reuse": {
+          "value": 3.5,
+          "reason": "Apache-2.0，可借鉴 KBService/工具注册/服务端SDK分层；旧LangChain及大量固定依赖使整库迁移成本高，更适合按模块借鉴。",
+          "evidence": [
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/pyproject.toml",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/knowledge_base/kb_service/base.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/langchain_chatchat/agents/all_tools_agent.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/chatchat/server/agent/tools_factory/search_local_knowledgebase.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/libs/chatchat-server/tests/api/test_kb_api.py",
+            "https://github.com/chatchat-space/Langchain-Chatchat/blob/49165d6af4438aa7e8a1f71ce276db55f4405151/LICENSE"
+          ],
+          "status": "source-reviewed"
+        }
+      },
+      "strengths": [
+        "知识库管理、工具与应用分层均有源码",
+        "API测试给出上传/检索/更新/删除的业务路径",
+        "可研究向量存储适配器与SQL元数据边界"
+      ],
+      "gaps": [
+        "最后默认分支提交2025-11-10；最近平台更新时间不是新代码",
+        "LangChain 0.1.17固定依赖与当前1.x存在代际差异",
+        "模型、依赖资源成本与安全权限未执行验收"
+      ],
+      "learning_path": [
+        "先读 KBService 的文件/向量库边界",
+        "追踪 search_local_knowledgebase 工具注册",
+        "对照自己的最小RAG提取接口，不先搬整套应用"
+      ]
+    }
+  ]
+}

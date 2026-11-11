@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "idea",
+  "title": "LangChain：从入门到应用",
+  "goal": "学习 LangChain，用 Python 做个人 RAG 与工具调用助手，优先可读示例和可复用完整流程",
+  "stack": [
+    "Python",
+    "LangChain"
+  ],
+  "capabilities": [
+    "RAG",
+    "agent"
+  ],
+  "queries": [
+    "LangChain RAG agent Python",
+    "LangChain RAG"
+  ],
+  "target_audience": "individual",
+  "observations": []
+}
