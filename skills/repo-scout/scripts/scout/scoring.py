@@ -70,6 +70,11 @@ def validate_assessments(assessments, candidate_ids):
                 raise ValueError(f"{key}: a reason is required")
             if status == "source-reviewed" and not evidence:
                 raise ValueError(f"{key}: source-reviewed judgments require evidence links")
+        if "stack" in row:
+            if not isinstance(row["stack"], list) or not row["stack"] or not all(isinstance(value, str) and value.strip() for value in row["stack"]):
+                raise ValueError("stack must be a nonempty list of nonempty strings")
+            if criteria.get("stack_fit", {}).get("status") != "source-reviewed":
+                raise ValueError("stack overrides require a source-reviewed stack_fit judgment with evidence links")
         for field in ("strengths", "gaps", "learning_path"):
             if field in row and (not isinstance(row[field], list) or not all(isinstance(v, str) for v in row[field])):
                 raise ValueError(f"{field} must be a list of strings")
@@ -183,7 +188,7 @@ def build_report(envelope, assessments=None, config=None, now=None):
         criteria = automatic_criteria(profile, candidate, now)
         assessment = reviews.get(candidate["id"], {})
         criteria.update(deepcopy(assessment.get("criteria", {})))
-        for field in ("summary", "category", "audience", "strengths", "gaps", "learning_path"):
+        for field in ("summary", "category", "stack", "audience", "strengths", "gaps", "learning_path"):
             if field in assessment:
                 candidate[field] = deepcopy(assessment[field])
         candidate.setdefault("summary", candidate.get("description") or "待审阅")

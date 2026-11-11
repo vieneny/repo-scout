@@ -12,12 +12,19 @@ Match `id` exactly to a candidate in `inspected.json`, including the provider pr
       "id": "github:owner/repository",
       "summary": "Explain why this project fits this learning goal.",
       "category": "application",
+      "stack": ["Python", "LangChain"],
       "audience": {
         "label": "individual",
         "reason": "Describe setup and conceptual effort, not company size.",
         "evidence": ["https://github.com/owner/repository/blob/main/README.md"]
       },
       "criteria": {
+        "stack_fit": {
+          "value": 5,
+          "reason": "Inspected dependencies and imports confirm the relevant runtime stack.",
+          "evidence": ["https://github.com/owner/repository/blob/main/requirements.txt"],
+          "status": "source-reviewed"
+        },
         "completeness": {
           "value": 3,
           "reason": "Describe inspected implementation and remaining gaps.",
@@ -40,6 +47,8 @@ Match `id` exactly to a candidate in `inspected.json`, including the provider pr
 ```
 
 The URLs above illustrate the schema; replace them with actual inspected public sources. Prefer implementation or manifest links for implementation/stack claims and release/commit links for time claims. Do not reuse a README URL as generic evidence for unrelated claims.
+
+The optional `stack` field supplements or corrects incomplete automatic detection by replacing the collected list. Omit it to preserve the detected stack. Supply a nonempty list of nonempty technology names, and include a `source-reviewed` `stack_fit` judgment with public links to the manifests or implementation actually inspected. List the primary runtime stack; do not present development or test dependencies as application requirements. Stars and timestamps remain collector metadata.
 
 Supported criterion statuses are `source-reviewed`, `heuristic`, and `unknown`. Values must be finite numbers from 0 through 5, or `null`. Do not mark execution as source review: if runtime testing was separately authorized, describe exactly what was executed and its result in the reason or evidence, without implying a full production audit.
 

@@ -77,6 +77,14 @@
         "先读 backend/agents/base_agent.py，理解 create_agent、消息与工具。",
         "再跟踪 backend/rag/index_manager.py → rag_agent.py，理解索引、检索与工具封装。",
         "最后参考 FastAPI 路由与前端；LangGraph、DeepAgents、Guardrails 按需扩展。"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "LangGraph",
+        "FastAPI",
+        "FAISS",
+        "Next.js"
       ]
     },
     {
@@ -155,6 +163,13 @@
         "先读 populate_database.py，画出加载→分块→持久化与增量去重。",
         "再读 query_data.py，跟踪相似检索→上下文→提示词→模型→来源。",
         "理解 test_rag.py 的模型判分局限；若要运行，先确定依赖兼容版本、模型和授权条件。"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "Chroma",
+        "Ollama",
+        "AWS Bedrock"
       ]
     },
     {
@@ -236,6 +251,14 @@
         "先读 m03/m05 理解工具 schema 与 Agent 执行，注意经典 API 与 v1 API 差异。",
         "跟读 m06 的完整 RAG 链，再读 m07 的 Chroma、reranker 和工具封装。",
         "按需学习 m08/m09 的状态图，再参考 Streamlit；将模型配置和顶层调用拆为可测试模块。"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "LangGraph",
+        "FAISS",
+        "Chroma",
+        "Streamlit"
       ]
     },
     {
@@ -320,6 +343,16 @@
         "先读 backend/app/agent/agent.py 和 agentic_rag/service.py，画出业务与检索边界。",
         "结合 test_agent_rag_integration.py 学习假模型和工具执行的集成测试。",
         "最后研究 auth_utils、MySQL 检查点和前端，再决定是否承担整套基础设施；简化分支另行评估。"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "FastAPI",
+        "React",
+        "TypeScript",
+        "MySQL",
+        "Redis",
+        "Neo4j"
       ]
     },
     {
@@ -401,6 +434,12 @@
         "先阅读 README 与官方 Models/Tools 文档",
         "从 create_agent 的工具调用接口入手",
         "只追踪需要的中间件与检查点边界"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "LangGraph",
+        "Pydantic"
       ]
     },
     {
@@ -482,6 +521,12 @@
         "先做通一个最小检索问答",
         "阅读 StateGraph 内嵌单节点示例",
         "再增加条件路由与持久化检查点"
+      ],
+      "stack": [
+        "Python",
+        "LangGraph",
+        "LangChain Core",
+        "Pydantic"
       ]
     },
     {
@@ -569,6 +614,13 @@
         "先读 chat_with_documents.py 的检索流程",
         "分离 Streamlit 展示与检索逻辑",
         "用当前 LangChain API 重写后再尝试运行"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "Streamlit",
+        "DocArray",
+        "HuggingFace"
       ]
     },
     {
@@ -663,6 +715,14 @@
         "先读 KBService 的文件/向量库边界",
         "追踪 search_local_knowledgebase 工具注册",
         "对照自己的最小RAG提取接口，不先搬整套应用"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "FastAPI",
+        "Streamlit",
+        "SQLAlchemy",
+        "FAISS"
       ]
     }
   ]

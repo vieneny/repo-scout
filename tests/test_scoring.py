@@ -29,6 +29,48 @@ class ScoringTests(unittest.TestCase):
         report = build_report(self.envelope, review)
         self.assertEqual(report["items"][0]["review_coverage"], .25)
 
+    def test_collected_stack_preserved_when_review_omits_stack(self):
+        self.envelope["candidates"][0]["stack"] = ["Python"]
+        review = {"schema_version": 1, "assessments": [{"id": "github:a/a", "summary": "Reviewed description"}]}
+        report = build_report(self.envelope, review)
+        self.assertEqual(report["items"][0]["stack"], ["Python"])
+        report["items"][0]["stack"].append("LangChain")
+        self.assertEqual(self.envelope["candidates"][0]["stack"], ["Python"])
+
+    def test_source_review_can_correct_incomplete_stack_without_mutating_inputs(self):
+        self.envelope["candidates"][0]["stack"] = ["Python"]
+        reviewed_stack = ["Python", "LangChain", "LangGraph", "FAISS", "Chroma"]
+        review = {"schema_version": 1, "assessments": [{"id": "github:a/a", "stack": reviewed_stack, "criteria": {"stack_fit": {"value": 5, "status": "source-reviewed", "reason": "Imports and dependency manifest confirm the runtime stack.", "evidence": ["https://github.com/a/a/blob/main/requirements.txt"]}}}]}
+        original_envelope, original_review = copy.deepcopy(self.envelope), copy.deepcopy(review)
+        item = build_report(self.envelope, review)["items"][0]
+        self.assertEqual(item["stack"], reviewed_stack)
+        self.assertEqual(item["criteria"]["stack_fit"]["status"], "source-reviewed")
+        self.assertEqual(item["criteria"]["stack_fit"]["value"], 5)
+        item["stack"].append("FastAPI")
+        self.assertEqual(self.envelope, original_envelope)
+        self.assertEqual(review, original_review)
+
+    def test_stack_override_rejects_missing_or_invalid_technology_names(self):
+        for stack in [None, "Python", [], [1], [""], ["  "], ["Python", None]]:
+            with self.subTest(stack=stack):
+                row = {"id": "github:a/a", "stack": stack, "criteria": {"stack_fit": {"value": 5, "status": "source-reviewed", "reason": "Inspected dependencies", "evidence": ["https://github.com/a/a/blob/main/requirements.txt"]}}}
+                with self.assertRaises(ValueError):
+                    validate_assessments({"schema_version": 1, "assessments": [row]}, {"github:a/a"})
+
+    def test_stack_override_requires_reviewed_fit_and_public_evidence(self):
+        judgments = [
+            None,
+            {"value": 5, "status": "heuristic", "reason": "Keyword match", "evidence": ["https://github.com/a/a"]},
+            {"value": None, "status": "unknown", "reason": "Not checked", "evidence": []},
+            {"value": 5, "status": "source-reviewed", "reason": "Inspected dependencies", "evidence": []},
+            {"value": 5, "status": "source-reviewed", "reason": "Inspected dependencies", "evidence": ["https://user:secret@example.com/requirements.txt"]},
+        ]
+        for judgment in judgments:
+            with self.subTest(judgment=judgment):
+                row = {"id": "github:a/a", "stack": ["Python", "LangChain"], "criteria": {} if judgment is None else {"stack_fit": judgment}}
+                with self.assertRaises(ValueError):
+                    validate_assessments({"schema_version": 1, "assessments": [row]}, {"github:a/a"})
+
     def test_reweighting_can_change_ranking(self):
         envelope = copy.deepcopy(self.envelope)
         envelope["candidates"].append(dict(envelope["candidates"][0], id="github:b/b", name="b/b"))

@@ -22,7 +22,9 @@ Inspection adds `last_commit_at`, `latest_release_at`, `readme_excerpt`, `stack:
 
 ## Agent assessments
 
-An assessment file contains `schema_version: 1`, `assessments: []`. Each assessment has candidate `id`, optional `summary`, `category`, `audience: {label, reason, evidence: string[]}`, `strengths: string[]`, `gaps: string[]`, `learning_path: string[]`, and `criteria`.
+An assessment file contains `schema_version: 1`, `assessments: []`. Each assessment has candidate `id`, optional `summary`, `category`, `stack: string[]`, `audience: {label, reason, evidence: string[]}`, `strengths: string[]`, `gaps: string[]`, `learning_path: string[]`, and `criteria`.
+
+An optional `stack` replaces the automatically detected stack after source review; omit it to preserve collected values. It must be a nonempty list of nonempty technology names and requires a `source-reviewed` `stack_fit` criterion with public evidence links to inspected manifests or implementation. Use it to correct incomplete detection, not to infer dependencies from a repository's name.
 
 Criterion keys are `relevance`, `stack_fit`, `completeness`, `maintenance`, `learning_fit`, `reuse`, `popularity`. Each value is `{value: number 0..5 or null, reason: string, evidence: string[], status: 'source-reviewed'|'heuristic'|'unknown'}`. A source-reviewed non-null judgment requires an evidence link and an explanation. No candidate execution is implied. Do not fabricate missing metrics or public evidence.
 
