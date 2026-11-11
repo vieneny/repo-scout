@@ -6,7 +6,7 @@ Give your agent a repository URL, a local project, or an idea. Repo Scout discov
 
 [Live LangChain report](https://vieneny.github.io/repo-scout/) · [中文说明](README.zh-CN.md) · [Skill](skills/repo-scout/SKILL.md) · [Example data](examples/langchain/) · [Architecture](docs/architecture.md)
 
-![Repo Scout ranked project report](docs/screenshots/overview.png)
+![Repo Scout ranked project report](docs/screenshots/overview.jpg)
 
 ## From an idea to a useful shortlist
 
@@ -130,7 +130,7 @@ The included [LangChain example](examples/langchain/) starts with an individual 
 
 Use the example to understand why a framework, an educational example, and a complete application may receive different learning and reuse judgments. Its Stars and maintenance facts are a dated snapshot, not live counters. The report distinguishes static source review from runtime testing; the candidate projects were not installed merely to produce the comparison.
 
-![Comparing candidate evidence and trade-offs](docs/screenshots/compare.png)
+![Comparing candidate evidence and trade-offs](docs/screenshots/compare.jpg)
 
 ## Development
 

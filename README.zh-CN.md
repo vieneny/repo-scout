@@ -6,7 +6,7 @@ Repo Scout 先建立项目画像，再检索同类项目、核查证据、评分
 
 [在线体验 LangChain 报告](https://vieneny.github.io/repo-scout/) · [English](README.md) · [Skill](skills/repo-scout/SKILL.md) · [案例数据](examples/langchain/) · [项目架构](docs/architecture.md)
 
-![项目筛选与排名报告](docs/screenshots/overview.png)
+![项目筛选与排名报告](docs/screenshots/overview.jpg)
 
 ## 可以做什么
 
@@ -130,7 +130,7 @@ python skills/repo-scout/scripts/repo_scout.py render --input ./results/langchai
 
 这个案例用于展示：框架本身、教学示例和完整应用，会因为不同的学习与复用价值获得不同判断。Stars 和维护信息是带日期的快照，不是实时计数。报告区分静态源码核验与实际运行测试，生成比较并不意味着安装运行了全部候选项目。
 
-![项目对比与证据查看](docs/screenshots/compare.png)
+![项目对比与证据查看](docs/screenshots/compare.jpg)
 
 ## 开发与贡献
 
