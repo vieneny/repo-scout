@@ -11,7 +11,7 @@ Date: 2026-11-11. Candidate research is read-only. No candidate packages, model 
 - A real public repository URL was profiled through the CLI without installing its code.
 - Skill metadata validation passed; JavaScript syntax check passed.
 - Bundled LangChain report rebuilds from saved inspected data and assessments without network access. The generated report JSON, HTML and Pages copy are checked for consistency.
-- [Earlier GitHub Actions verification](https://github.com/vieneny/repo-scout/actions/runs/42966198982) passed on Ubuntu and Windows with Python 3.10 and 3.12; the JavaScript job also passed. That run tested implementation commit `234c8b853224cc1bc9a2e8f8d50072b82abdd1ff`, before the broader-scenario expansion. Current run results are available in [Actions](https://github.com/vieneny/repo-scout/actions/workflows/checks.yml).
+- [GitHub Actions verification](https://github.com/vieneny/repo-scout/actions/runs/42981012452) passed on Ubuntu and Windows with Python 3.10 and 3.12; the JavaScript job also passed. That run tested broader-scenario implementation commit `c6b8c9831179ece56b73c590da4cdbd85143ed6f`. Later publication checks are available in [Actions](https://github.com/vieneny/repo-scout/actions/workflows/checks.yml).
 
 ## Live provider scope
 
@@ -33,7 +33,7 @@ Tests of Repo Scout do not prove that candidate projects install, pass tests, sc
 
 ## Browser and publication
 
-The [published HTTPS example](https://vieneny.github.io/repo-scout/) was opened and tested in the in-app browser at its default 772 × 750 viewport. The page had no horizontal overflow at that width, and the captured console contained no errors. This is one browser/viewport check, not a full cross-browser or mobile compatibility certification.
+The [published HTTPS example](https://vieneny.github.io/repo-scout/) was opened and tested in the in-app browser at its default viewport; the unmodified captures are 772 × 750. The page had no document-level horizontal overflow, and the captured console contained no errors. The broader-scenario update was reopened to verify the new search/detail labels, search for `RAGNotebook`, and three-project comparison, then refresh the screenshot. This is one browser/viewport check, not a full cross-browser or mobile compatibility certification.
 
 Verified interactions:
 
