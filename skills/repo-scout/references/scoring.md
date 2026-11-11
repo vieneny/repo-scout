@@ -49,6 +49,8 @@ Pass a JSON file through `--config weights.json`:
 
 Use finite nonnegative numbers with a positive total. The CLI normalizes them. Increase `learning_fit` for a beginner; increase `completeness` and `reuse` when adapting a real application. “Enterprise-oriented” is an audience/scope label, not an automatic score bonus.
 
+Completeness is relative to the desired outcome. A readable Java application with a real business flow and database may fit a graduation project better than a large enterprise platform. A media tool may be unusable for the brief if its required GPU, paid API, model access, or output rights conflict with a constraint. Explain these effects under the existing relevance, completeness, learning, or reuse criteria without double-counting a single issue across every score. See [scenarios.md](scenarios.md) for domain-specific evidence to inspect. If a decisive requirement is unknown, expose the gap and its score uncertainty.
+
 ## Avoid weak proxies
 
 - The primary GitHub language does not establish the full stack. Read manifests and configuration.

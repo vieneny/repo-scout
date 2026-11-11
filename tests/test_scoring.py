@@ -81,6 +81,29 @@ class ScoringTests(unittest.TestCase):
         weights = {key: 0 for key in normalized_weights()}; weights["reuse"] = 1
         self.assertEqual(build_report(envelope, reviews, {"weights": weights})["items"][0]["name"], "b/b")
 
+    def test_creative_usage_requirements_preserve_evidence_without_mutating_review(self):
+        review = {"schema_version": 1, "assessments": [{"id": "github:a/a", "usage_requirements": ["GPU memory requirement was not specified; confirm before running.", "Model weights have separate terms."], "usage_evidence": ["https://github.com/a/a/blob/main/README.md"]}]}
+        original = copy.deepcopy(review)
+        item = build_report(self.envelope, review)["items"][0]
+        self.assertEqual(item["usage_requirements"], review["assessments"][0]["usage_requirements"])
+        self.assertEqual(item["usage_evidence"], review["assessments"][0]["usage_evidence"])
+        item["usage_requirements"].append("Extra note")
+        self.assertEqual(review, original)
+
+    def test_usage_claims_require_nonempty_text_and_public_evidence(self):
+        for fields in [
+            {"usage_requirements": "GPU required"},
+            {"usage_requirements": [""]},
+            {"usage_requirements": [42]},
+            {"usage_requirements": ["GPU required"]},
+            {"usage_requirements": ["GPU required"], "usage_evidence": ["file:///private/model.txt"]},
+            {"usage_requirements": ["GPU required"], "usage_evidence": ["https://user:secret@example.com/model"]},
+        ]:
+            with self.subTest(fields=fields):
+                row = dict(id="github:a/a", **fields)
+                with self.assertRaises(ValueError):
+                    validate_assessments({"schema_version": 1, "assessments": [row]}, {"github:a/a"})
+
     def test_nonfinite_negative_and_all_zero_weights_rejected(self):
         for weights in [{"relevance": float("nan")}, {"reuse": -1}, {key: 0 for key in normalized_weights()}, {"typo": 1}]:
             with self.assertRaises(ValueError):

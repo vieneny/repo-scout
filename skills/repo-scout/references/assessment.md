@@ -40,6 +40,8 @@ Match `id` exactly to a candidate in `inspected.json`, including the provider pr
       },
       "strengths": ["A concrete strength supported by inspected evidence"],
       "gaps": ["A task-relevant missing or unverified capability"],
+      "usage_requirements": ["Describe a setup, model or operating requirement actually found in the documentation; state what remains unknown."],
+      "usage_evidence": ["https://github.com/owner/repository/blob/main/README.md"],
       "learning_path": ["Start with the relevant example, then read its implementation."]
     }
   ]
@@ -49,6 +51,8 @@ Match `id` exactly to a candidate in `inspected.json`, including the provider pr
 The URLs above illustrate the schema; replace them with actual inspected public sources. Prefer implementation or manifest links for implementation/stack claims and release/commit links for time claims. Do not reuse a README URL as generic evidence for unrelated claims.
 
 The optional `stack` field supplements or corrects incomplete automatic detection by replacing the collected list. Omit it to preserve the detected stack. Supply a nonempty list of nonempty technology names, and include a `source-reviewed` `stack_fit` judgment with public links to the manifests or implementation actually inspected. List the primary runtime stack; do not present development or test dependencies as application requirements. Stars and timestamps remain collector metadata.
+
+Use optional `usage_requirements` for nonempty notes about actual setup, hardware, supported inputs/outputs, model downloads, API costs, and code/model/asset licensing. A nonempty list requires public http(s) links in `usage_evidence`; both fields appear in detail and comparison views. Label undocumented values as unknown, attribute published performance numbers to their source, and distinguish maintainer samples from your own execution. Do not assume a permissive code license also covers model weights, training data or generated assets. Omit these fields when they add no useful decision evidence.
 
 Supported criterion statuses are `source-reviewed`, `heuristic`, and `unknown`. Values must be finite numbers from 0 through 5, or `null`. Do not mark execution as source review: if runtime testing was separately authorized, describe exactly what was executed and its result in the reason or evidence, without implying a full production audit.
 

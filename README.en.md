@@ -1,12 +1,57 @@
-# Repo Scout
+# Repo Scout · Open-source project discovery and comparison AI Skill
 
 [简体中文](README.md) | **English**
 
-**Find the open-source projects worth studying before you start building.**
+**Describe your goal. Find open-source projects and AI tools worth trying.**
 
-Give your agent a repository URL, a local project, or an idea. Repo Scout discovers related projects, compares the evidence, and turns the shortlist into a ranked, interactive HTML report.
+Find Java graduation project references, learn a framework, or compare AI image generation, text-to-video, voice and content creation tools. Repo Scout helps your AI assistant search GitHub, Gitee and GitLab, review capabilities and operating requirements, and create a ranked comparison backed by public evidence.
 
 [Live LangChain report](https://vieneny.github.io/repo-scout/) · [Skill](skills/repo-scout/SKILL.md) · [Example data](examples/langchain/) · [Architecture](docs/architecture.md)
+
+## Easiest start: paste the link and describe your goal
+
+Send this complete request to an AI assistant that can read GitHub content, such as Codex, Claude or ChatGPT when their browsing tools are available:
+
+```text
+https://github.com/vieneny/repo-scout 使用这个规范，找一下学习Java的毕设设计项目
+```
+
+Or in English:
+
+```text
+https://github.com/vieneny/repo-scout Follow this workflow to find Java graduation projects that an undergraduate can understand and adapt.
+```
+
+The Repo Scout URL points to the research workflow. The rest of the message is the research goal. Your assistant reads the [Skill entrypoint](skills/repo-scout/SKILL.md) and relevant scenario guide, discovers candidates, checks evidence and ranks them. Defaults favor GitHub and individual learning/use; add sources, device limits, budget or preferences in the same message.
+
+**Try the link first; install the Skill when you want to reuse it.** Browsing, local file access and report creation use the capabilities of your current AI environment. Automated collection/rendering needs Python 3.10+. An assistant with browsing but no script execution can still produce a sourced comparison table.
+
+[Try the LangChain demo](https://vieneny.github.io/repo-scout/) to explore filtering, adjustable weights and project comparison.
+
+## Same workflow, different goals
+
+| Goal | Example request after the repository link | Evidence to compare |
+|---|---|---|
+| Java graduation project / Spring Boot application | Find understandable projects across several business domains | Business flow, database, frontend/backend, setup, adaptation scope |
+| Framework learning | Learn LangChain, Vue or React with readable examples | Versions, prerequisites, examples, complete learning path |
+| AI art / image generation / ComfyUI | Find approachable open-source image tools and workflows | Input/output, UI, models, GPU memory, model and asset terms |
+| Text-to-video / image-to-video | Find video generation projects for an individual computer | Output samples, duration/resolution evidence, hardware, downloads, cost |
+| Video editing / subtitles / voice-over | Find tools that turn scripts into subtitled narrated videos | Assets → voice → subtitles → composition, formats, languages, services |
+| Audio / TTS / music generation | Find usable open-source voice and audio tools | Samples, model terms, device requirements, setup burden |
+| Writing / presentations / knowledge workflows | Find AI writing, slide generation or knowledge tools | Editable output, citations, import/export, model services and costs |
+| Local projects / open-source alternatives | Find similar implementations or alternatives to my project | Capability fit, reusable boundaries, integration and migration effort |
+
+More copyable requests:
+
+```text
+https://github.com/vieneny/repo-scout Find open-source AI image generation tools for personal local use. Compare GPU requirements, model terms and setup effort.
+```
+
+```text
+https://github.com/vieneny/repo-scout Find text-to-video and image-to-video projects. Compare output samples, hardware, cost and reuse value.
+```
+
+Repo Scout discovers and compares projects/tools that can achieve the goal. Actually using a selected tool to generate media is a subsequent task. See the [scenario guide](skills/repo-scout/references/scenarios.md) for appropriate evaluation criteria.
 
 ![Repo Scout ranked project report](docs/screenshots/overview.jpg)
 
@@ -15,7 +60,7 @@ Give your agent a repository URL, a local project, or an idea. Repo Scout discov
 ```text
 Repository URL / local project / idea
                   ↓
-       Goal + stack + capabilities
+       Goal + capabilities + constraints
                   ↓
        GitHub / Gitee / GitLab
                   ↓
@@ -26,16 +71,16 @@ Repository URL / local project / idea
 
 - **Three starting points:** an existing repository, your local project, or something you want to build or learn.
 - **Configurable sources:** GitHub by default, with Gitee and GitLab adapters. Source failures remain visible instead of becoming empty search results.
-- **A comparison for your goal:** technical stack, implemented capabilities, project scope, individual/team suitability, maintenance, popularity, and reuse value.
+- **A comparison for your goal:** technologies/workflows, completeness, individual/team suitability, maintenance, popularity and reuse; creative tools add device, model, cost and licensing evidence.
 - **Evidence next to the score:** explainable criterion scores, public source links, uncertainty ranges, and source-review coverage.
 - **An explorable report:** filter and sort projects, change scoring priorities locally, compare candidates, inspect evidence, and switch themes.
 - **A portable artifact:** one self-contained HTML file; no running service, CDN, analytics, or model account is needed to read it.
 
 The presentation takes inspiration from Archify's useful idea of a self-contained, explorable artifact. Repo Scout has its own research workflow, scoring model, and renderer; it does not bundle or require Archify.
 
-## Install as a Skill
+## Use regularly: install the Skill
 
-Requires a compatible skill host and **Python 3.10+**. The Python helper uses only the standard library. The host agent supplies interpretation and source review; Repo Scout does not require a separate model service.
+Installation requires a compatible skill host; automated collection and rendering require **Python 3.10+**. The Python helper uses only the standard library. The host agent supplies interpretation and source review; Repo Scout does not require a separate model service.
 
 ```bash
 npx skills add vieneny/repo-scout --skill repo-scout
@@ -79,6 +124,8 @@ results/langchain/
 └── report.html      Self-contained interactive report
 ```
 
+Repeat `--constraint "Windows" --constraint "Low personal operating cost"` to preserve operating limits for agent review. Constraints are not automatically sent in public search queries.
+
 Open `report.html` in a modern browser. For the other starting points, replace `--idea ...` with `--local ./my-project` or `--repo https://github.com/owner/repository`.
 
 For `run`, **`--limit` is the total inspection budget** (1–30), not a promise that discovery found only that many projects. `search.json` retains collected candidates; `inspected.json` records the inspected count and unreviewed tail. Results from provider/query pairs are interleaved so the first source does not automatically fill the budget.
@@ -99,10 +146,10 @@ See the [assessment format](skills/repo-scout/references/assessment.md) and [ful
 | Dimension | Default weight | Decision it helps with |
 |---|---:|---|
 | Relevance | 25 | Does it solve the actual problem? |
-| Stack fit | 15 | Can its technologies fit or teach the desired stack? |
+| Technical and operating fit | 15 | Do its stack, workflow, platform and device requirements fit? |
 | Completeness | 15 | Is the relevant workflow implemented and supported by evidence? |
 | Maintenance | 10 | What do code activity, releases, and maintainer behavior show? |
-| Learning fit | 15 | Can the intended learner understand and use it? |
+| Learning and usability fit | 15 | Can the intended user understand, set up and use it? |
 | Reuse value | 15 | What can be reused, under which license and integration cost? |
 | Popularity | 5 | What do source-specific attention/adoption signals show? |
 
@@ -141,6 +188,10 @@ python -m unittest discover -s tests -v
 ```
 
 The test suite checks data collection boundaries, provider normalization and failures, scoring invariants, and offline report safety. No live credentials or candidate installations are required for unit tests. Read the [architecture](docs/architecture.md), [validation record](docs/validation.md), or [contribution guide](CONTRIBUTING.md) for details.
+
+## Support and feedback
+
+If this saves you search and evaluation time, a [Star](https://github.com/vieneny/repo-scout) helps others discover it. Share concrete use cases, first-use friction or evidence-backed improvements through [Issues](https://github.com/vieneny/repo-scout/issues).
 
 ## License
 

@@ -151,6 +151,20 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(len(parser.scripts), 2)
         self.assertFalse(parser.external_resources)
 
+    def test_creative_usage_constraints_remain_inert_and_optional(self):
+        payload = '</script><img src="https://evil.invalid/pixel" onerror="attack()">'
+        report = self.report()
+        legacy_parser = DocumentParser(); legacy_parser.feed(self.render(report))
+        legacy_data = json.loads(next(s["data"] for s in legacy_parser.scripts if s["attrs"].get("id") == "report-data"))
+        self.assertNotIn("constraints", legacy_data["profile"])
+        report["profile"]["constraints"] = ["Windows；仅 CPU", payload]
+        report["items"] = [{"name": "creative/workflow", "category": "workflow", "usage_requirements": ["需要独立模型权重；商用条件待核查", payload], "usage_evidence": ["https://example.com/model-card", "javascript:attack()"]}]
+        parser = DocumentParser(); parser.feed(self.render(report))
+        data = json.loads(next(s["data"] for s in parser.scripts if s["attrs"].get("id") == "report-data"))
+        self.assertEqual(data, report)
+        self.assertEqual(len(parser.scripts), 2)
+        self.assertFalse(parser.external_resources)
+
 
 if __name__ == "__main__":
     unittest.main()

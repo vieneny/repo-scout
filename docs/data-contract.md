@@ -6,7 +6,7 @@ The self-contained distributable skill is `skills/repo-scout/`. Python entrypoin
 
 ## Profiles
 
-`schema_version: 1`, `kind: idea|local|repository`, `title`, `goal`, `stack: string[]`, `capabilities: string[]`, `queries: string[]`, `target_audience: individual|team|enterprise`, optional `observations: []`. A local profile records only relative filenames and technology names; no absolute paths, source bodies, environment values, private remote credentials, or secrets. The agent can enrich the profile without uploading source files.
+`schema_version: 1`, `kind: idea|local|repository`, `title`, `goal`, `stack: string[]`, `capabilities: string[]`, `queries: string[]`, `target_audience: individual|team|enterprise`, optional `observations: []` and `constraints: string[]`. Explicit operating constraints are preserved for host review and report display; the helper does not infer hardware limits or add constraints to public search queries. Older profiles may omit them. A local profile records only relative filenames and technology names; no absolute paths, source bodies, environment values, private remote credentials, or secrets. The agent can enrich the profile without uploading source files.
 
 ## Provider candidates
 
@@ -14,7 +14,7 @@ Every candidate has `id` (`github:owner/repo`, etc.), `provider`, `name` (`owner
 
 Inspection adds `last_commit_at`, `latest_release_at`, `readme_excerpt`, `stack: string[]`, `signals` (boolean/null `tests`, `ci`, `docs`, `examples`, `deployment`, `manifest`), `evidence` (objects with `url`, `kind`, `note`), and `inspection_errors: []`. File presence is a structural signal, never a runtime or enterprise-readiness claim.
 
-`scout.providers.get_provider(name)` returns a provider implementing `search(query, limit=10) -> list[dict]`, `inspect(candidate) -> dict`, and `resolve(identifier) -> dict`. Network errors use `ProviderError` and never look like an empty successful search. `scout.profile.build_profile(kind, value, stack=None, capabilities=None, audience='individual') -> dict` analyzes an idea or local directory. Repository input is resolved and inspected by the CLI then turned into the same profile shape. No network access in `profile.py`.
+`scout.providers.get_provider(name)` returns a provider implementing `search(query, limit=10) -> list[dict]`, `inspect(candidate) -> dict`, and `resolve(identifier) -> dict`. Network errors use `ProviderError` and never look like an empty successful search. `scout.profile.build_profile(kind, value, stack=None, capabilities=None, audience='individual', constraints=None) -> dict` analyzes an idea or local directory. Repository input is resolved and inspected by the CLI then turned into the same profile shape. No network access in `profile.py`.
 
 ## Search / inspection envelopes
 
@@ -22,9 +22,11 @@ Inspection adds `last_commit_at`, `latest_release_at`, `readme_excerpt`, `stack:
 
 ## Agent assessments
 
-An assessment file contains `schema_version: 1`, `assessments: []`. Each assessment has candidate `id`, optional `summary`, `category`, `stack: string[]`, `audience: {label, reason, evidence: string[]}`, `strengths: string[]`, `gaps: string[]`, `learning_path: string[]`, and `criteria`.
+An assessment file contains `schema_version: 1`, `assessments: []`. Each assessment has candidate `id`, optional `summary`, `category`, `stack: string[]`, `audience: {label, reason, evidence: string[]}`, `strengths: string[]`, `gaps: string[]`, `learning_path: string[]`, `usage_requirements: string[]`, `usage_evidence: string[]`, and `criteria`. Categories include tutorial, framework, application, platform, library, model, workflow, resource, and unknown; they describe scope rather than award points.
 
 An optional `stack` replaces the automatically detected stack after source review; omit it to preserve collected values. It must be a nonempty list of nonempty technology names and requires a `source-reviewed` `stack_fit` criterion with public evidence links to inspected manifests or implementation. Use it to correct incomplete detection, not to infer dependencies from a repository's name.
+
+Optional `usage_requirements` lists nonempty, sourced notes about setup, hardware, input/output, external APIs/costs, or separate code/model/asset terms. A nonempty list requires at least one public http(s) link in `usage_evidence`; credential-bearing and local URLs are rejected. Requirements remain evidence-backed statements, not runtime certification. Report an unspecified hardware/cost fact as unknown, not a guessed numeric minimum. Both fields are preserved in ranked items and shown in detail/comparison when present; older assessments can omit them.
 
 Criterion keys are `relevance`, `stack_fit`, `completeness`, `maintenance`, `learning_fit`, `reuse`, `popularity`. Each value is `{value: number 0..5 or null, reason: string, evidence: string[], status: 'source-reviewed'|'heuristic'|'unknown'}`. A source-reviewed non-null judgment requires an evidence link and an explanation. No candidate execution is implied. Do not fabricate missing metrics or public evidence.
 
@@ -38,4 +40,4 @@ Default weights: relevance 25, stack_fit 15, completeness 15, maintenance 10, le
 
 ## CLI contract
 
-Commands: `profile (--idea TEXT|--local PATH|--repo URL) [--stack ...] [--capability ...] [--audience ...] --out FILE`; `search --profile FILE --sources github,gitee,gitlab [--query TEXT ...] [--limit N] --out FILE`; `inspect --input FILE [--limit N] --out FILE`; `score --input FILE [--assessments FILE] [--config FILE] --out FILE`; `render --input FILE --out FILE`; `run (--idea TEXT|--local PATH|--repo URL) --out-dir DIR [--sources ...] [--query TEXT ...] [--repo-seed URL ...] [--limit N] [--stack ...] [--capability ...] [--audience ...] [--config FILE] [--assessments FILE]`. `run` writes profile.json, search.json, inspected.json, report.json, report.html and emits compact JSON paths. `score` and `render` are fully offline. UTF-8 is required.
+Commands: `profile (--idea TEXT|--local PATH|--repo URL) [--stack ...] [--capability ...] [--constraint ...] [--audience ...] --out FILE`; `search --profile FILE --sources github,gitee,gitlab [--query TEXT ...] [--limit N] --out FILE`; `inspect --input FILE [--limit N] --out FILE`; `score --input FILE [--assessments FILE] [--config FILE] --out FILE`; `render --input FILE --out FILE`; `run (--idea TEXT|--local PATH|--repo URL) --out-dir DIR [--sources ...] [--query TEXT ...] [--repo-seed URL ...] [--limit N] [--stack ...] [--capability ...] [--constraint ...] [--audience ...] [--config FILE] [--assessments FILE]`. `--constraint` is repeatable. `run` writes profile.json, search.json, inspected.json, report.json, report.html and emits compact JSON paths. `score` and `render` are fully offline. UTF-8 is required.

@@ -78,6 +78,14 @@ def validate_assessments(assessments, candidate_ids):
         for field in ("strengths", "gaps", "learning_path"):
             if field in row and (not isinstance(row[field], list) or not all(isinstance(v, str) for v in row[field])):
                 raise ValueError(f"{field} must be a list of strings")
+        usage = row.get("usage_requirements", [])
+        if not isinstance(usage, list) or not all(isinstance(value, str) and value.strip() for value in usage):
+            raise ValueError("usage_requirements must be a list of nonempty strings")
+        usage_evidence = row.get("usage_evidence", [])
+        if not isinstance(usage_evidence, list) or not all(_http_url(url) for url in usage_evidence):
+            raise ValueError("usage_evidence must contain public http(s) URLs without credentials")
+        if usage and not usage_evidence:
+            raise ValueError("usage_requirements require public usage_evidence links")
         audience = row.get("audience")
         if audience is not None:
             if not isinstance(audience, dict) or audience.get("label") not in {"individual", "team", "enterprise-oriented", "unknown"}:
@@ -144,7 +152,7 @@ def automatic_criteria(profile, candidate, now):
         "completeness": _criterion(complete, "仅检查文件与目录结构信号，上限 2.5/5；没有执行主流程、测试或部署。", links),
         "maintenance": _criterion(maintenance, maintenance_reason, links),
         "learning_fit": _criterion(learning, "基于文档/示例结构，上限 3/5；尚未核对个人学习所需的完整步骤。", links),
-        "reuse": _criterion(reuse, f"许可证元数据：{license_name or '未知'}；组件边界与依赖成本尚未审阅。", links),
+        "reuse": _criterion(reuse, f"代码许可证元数据：{license_name or '未知'}；组件边界、模型/素材许可与使用成本尚未审阅。", links),
         "popularity": _criterion(popularity, "当前平台 Stars 的对数指标，100,000 Stars 达到上限；不等于用户数或代码质量。", links),
     }
 
@@ -188,7 +196,7 @@ def build_report(envelope, assessments=None, config=None, now=None):
         criteria = automatic_criteria(profile, candidate, now)
         assessment = reviews.get(candidate["id"], {})
         criteria.update(deepcopy(assessment.get("criteria", {})))
-        for field in ("summary", "category", "stack", "audience", "strengths", "gaps", "learning_path"):
+        for field in ("summary", "category", "stack", "audience", "strengths", "gaps", "learning_path", "usage_requirements", "usage_evidence"):
             if field in assessment:
                 candidate[field] = deepcopy(assessment[field])
         candidate.setdefault("summary", candidate.get("description") or "待审阅")

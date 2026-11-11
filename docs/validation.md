@@ -4,13 +4,14 @@ Date: 2026-11-11. Candidate research is read-only. No candidate packages, model 
 
 ## Local checks
 
-- Python unittest suite: **42 tests, 41 passed, 1 skipped**. The skipped symlink case needs Windows symlink creation permission; the same regression runs where supported.
-- Meaningful regressions cover local-source privacy boundaries, provider normalization/failure handling, public-only metadata, cross-origin credentials, multi-provider selection, seed priority/provenance, evidence-backed stack corrections, unknown score intervals, configurable ranking, stale-data dates, and HTML/script injection.
+- Python unittest suite: **52 tests, 51 passed, 1 skipped**. The skipped symlink case needs Windows symlink creation permission; the same regression runs where supported.
+- Meaningful regressions cover local-source privacy boundaries, provider normalization/failure handling, public-only metadata, cross-origin credentials, multi-provider selection, seed priority/provenance, evidence-backed stack corrections, unknown score intervals, configurable ranking, stale-data dates, and HTML/script injection. The broader-scenario expansion adds Chinese Java graduation-goal recognition, creative-tool dependency/capability detection, explicit constraints that stay out of automatic public queries, and source-linked operating requirements in scoring/rendering.
 - CLI idea → profile, score → JSON, render → HTML exercised offline; a separate network-blocked fixture completed local project → discovery → inspection → assessments → report.
+- An independent review also completed two network-blocked synthetic workflows: the exact direct-reference Java graduation brief, and a ComfyUI/video brief with Windows/no-paid-API constraints. It checked profile/query intent, static dependency parsing, private sentinel exclusion, sourced usage requirements and inert hostile text in rendered HTML.
 - A real public repository URL was profiled through the CLI without installing its code.
 - Skill metadata validation passed; JavaScript syntax check passed.
 - Bundled LangChain report rebuilds from saved inspected data and assessments without network access. The generated report JSON, HTML and Pages copy are checked for consistency.
-- [GitHub Actions verification](https://github.com/vieneny/repo-scout/actions/runs/42966198982) passed on Ubuntu and Windows with Python 3.10 and 3.12; the JavaScript job also passed. That run tested implementation commit `234c8b853224cc1bc9a2e8f8d50072b82abdd1ff`.
+- [Earlier GitHub Actions verification](https://github.com/vieneny/repo-scout/actions/runs/42966198982) passed on Ubuntu and Windows with Python 3.10 and 3.12; the JavaScript job also passed. That run tested implementation commit `234c8b853224cc1bc9a2e8f8d50072b82abdd1ff`, before the broader-scenario expansion. Current run results are available in [Actions](https://github.com/vieneny/repo-scout/actions/workflows/checks.yml).
 
 ## Live provider scope
 
@@ -25,6 +26,8 @@ See [provider-smoke.json](provider-smoke.json) for the bounded source receipts. 
 ## Example scope
 
 Three GitHub queries produced 26 unique candidates; 8 were selected for deeper static review. Seven dimensions include source-linked qualitative judgments and date/Stars heuristics. Missing license evidence stays unknown. All 8 candidates preserve source provenance. Qualitative source links use pinned commits.
+
+The Java graduation and creative-tool prompts in the READMEs are usage examples, not additional live research results. The new scenario behavior is covered by offline fixtures; the bundled LangChain data retains its original collection dates when its HTML presentation is regenerated.
 
 Tests of Repo Scout do not prove that candidate projects install, pass tests, scale, isolate users or operate safely in production. Enterprise-oriented classification describes intended scope and operating effort.
 

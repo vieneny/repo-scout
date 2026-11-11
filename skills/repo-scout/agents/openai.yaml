@@ -1,4 +1,4 @@
 interface:
   display_name: "Repo Scout"
-  short_description: "Find and rank open-source projects with evidence"
-  default_prompt: "Use $repo-scout to find open-source references for my project, compare their stack and completeness, and build an evidence-backed HTML shortlist."
+  short_description: "按需求发现开源项目与工具，比较技术栈、学习价值和使用门槛"
+  default_prompt: "Use $repo-scout to find open-source projects or tools for my goal, compare their fit and operating requirements with source evidence, and build a ranked HTML shortlist."

@@ -7,7 +7,7 @@
   const DEFAULT = {relevance:25,stack_fit:15,completeness:15,maintenance:10,learning_fit:15,reuse:15,popularity:5};
   const PRESETS = {balanced:DEFAULT,learning:{relevance:25,stack_fit:10,completeness:10,maintenance:10,learning_fit:25,reuse:15,popularity:5},reuse:{relevance:25,stack_fit:20,completeness:15,maintenance:10,learning_fit:5,reuse:20,popularity:5}};
   const AUDIENCES = {individual:'个人学习 / 使用',personal:'个人学习 / 使用',team:'团队协作',enterprise:'企业方向','enterprise-oriented':'企业方向',unknown:'尚未确认'};
-  const CATEGORIES = {framework:'开发框架',tutorial:'教程 / 示例',application:'完整应用',platform:'平台项目',library:'组件 / 库',tool:'开发工具',unknown:'形态待确认'};
+  const CATEGORIES = {framework:'开发框架',tutorial:'教程 / 示例',application:'完整应用',platform:'平台项目',library:'组件 / 库',tool:'工具',model:'模型 / 权重',workflow:'创作工作流',resource:'素材 / 资料',unknown:'形态待确认'};
   const STATUS = {'source-reviewed':'源码 / 资料核验',heuristic:'结构或元数据判断',unknown:'缺少判断依据'};
   const SIGNALS = {tests:'测试',ci:'CI',docs:'文档',examples:'示例',deployment:'部署',manifest:'依赖声明'};
   const $ = id => document.getElementById(id);
@@ -50,6 +50,8 @@
     tags.append(node('span','chip audience',AUDIENCES[profile.target_audience]||'个人学习 / 使用'));
     list(profile.stack).forEach(value=>tags.append(node('span','chip stack',value)));
     list(profile.capabilities).slice(0,6).forEach(value=>tags.append(node('span','chip',value)));
+    const constraints=list(profile.constraints).filter(value=>value.trim());
+    if(constraints.length){const section=$('profileConstraints');section.hidden=false;section.append(node('h2','','本次使用约束'));const entries=node('ul');constraints.forEach(value=>entries.append(node('li','',value)));section.append(entries);}
     const providers=[...new Set(items.map(item=>string(item.provider,'unknown')))].sort();
     providers.forEach(provider=>{const option=node('option','',provider);option.value=provider;$('providerFilter').append(option);});
     const receipts=Array.isArray(report.source_receipts)?report.source_receipts:[];
@@ -88,7 +90,7 @@
   }
   function addListSection(grid,title,values,ordered=false) {const section=node('section');section.append(node('h4','',title));const entries=list(values);if(entries.length){const ul=node(ordered?'ol':'ul');entries.forEach(value=>ul.append(node('li','',value)));section.append(ul);}else section.append(node('p','','尚未记录，建议继续核查。'));grid.append(section);}
   function details(item) {
-    const detail=node('details','row-detail');detail.append(node('summary','','依据、差距与学习入口'));
+    const detail=node('details','row-detail');detail.append(node('summary','','依据、差距与学习 / 使用入口'));
     const grid=node('div','detail-grid');
     const provenance=node('section','detail-full');provenance.append(node('h4','','候选从哪里来'));
     const discoveries=discoveryEntries(item),seen=new Set();
@@ -101,7 +103,8 @@
     criteriaSection.append(criteriaGrid);grid.append(criteriaSection);
     addListSection(grid,'值得借鉴',item.strengths);
     addListSection(grid,'缺口与使用条件',item.gaps);
-    if(list(item.learning_path).length)addListSection(grid,'建议学习顺序',item.learning_path,true);
+    if(list(item.learning_path).length)addListSection(grid,'学习 / 使用路线',item.learning_path,true);
+    if(list(item.usage_requirements).length){const usage=node('section','detail-full');addListSection(usage,'使用条件与成本',item.usage_requirements);const sources=node('p','usage-evidence');evidenceLinks(sources,item.usage_evidence);if(!sources.childNodes.length)sources.append(node('span','','条件来源尚未记录，需进一步核查。'));usage.append(sources);grid.append(usage);}
     const factsSection=node('section');factsSection.append(node('h4','','时间、许可与项目形态'));
     const facts=node('dl','facts');
     [['建仓',date(item.created_at)],['最近代码提交',date(item.last_commit_at)],['最近 Release',date(item.latest_release_at)],['最近推送',date(item.pushed_at)],['数据取得',date(item.retrieved_at)],['许可证',string(item.license,'未知')||'未知'],['项目形态',CATEGORIES[item.category]||string(item.category,'形态待确认')],['归档状态',item.archived===true?'已归档':item.archived===false?'未归档':'未知']].forEach(([label,value])=>facts.append(node('dt','',label),node('dd','',value)));
@@ -136,7 +139,7 @@
     const weights=normalizedWeights();if(!weights)return;
     currentScores=new Map(items.map(item=>[item._id,compute(item,weights)]));
     const query=$('searchInput').value.toLocaleLowerCase().trim(),provider=$('providerFilter').value,audience=$('audienceFilter').value,sort=$('sortSelect').value;
-    const filtered=items.filter(item=>{const haystack=[item.name,item.summary,item.description,item.language,...list(item.stack),...list(item.topics)].filter(Boolean).join(' ').toLocaleLowerCase();return (!query||haystack.includes(query))&&(!provider||item.provider===provider)&&(!audience||normalizeAudience(labelAudience(item))===audience);});
+    const filtered=items.filter(item=>{const haystack=[item.name,item.summary,item.description,item.language,...list(item.stack),...list(item.topics),...list(item.usage_requirements)].filter(Boolean).join(' ').toLocaleLowerCase();return (!query||haystack.includes(query))&&(!provider||item.provider===provider)&&(!audience||normalizeAudience(labelAudience(item))===audience);});
     filtered.sort((a,b)=>{const as=currentScores.get(a._id),bs=currentScores.get(b._id);if(sort==='stars'){const aa=typeof a.stars==='number'?a.stars:-1,bb=typeof b.stars==='number'?b.stars:-1;if(aa!==bb)return bb-aa;}if(sort==='updated'){const aa=Date.parse(a.last_commit_at)||0,bb=Date.parse(b.last_commit_at)||0;if(aa!==bb)return bb-aa;}return bs.low-as.low||bs.coverage-as.coverage||string(a.name).localeCompare(string(b.name),'en');});
     const fragment=document.createDocumentFragment();filtered.forEach((item,index)=>fragment.append(makeRow(item,index,weights,currentScores.get(item._id))));$('results').replaceChildren(fragment);$('resultCount').textContent=filtered.length;$('emptyState').hidden=filtered.length>0;updateCompareDock();
     if($('compareDialog').open)buildComparison();
@@ -147,11 +150,12 @@
     const row=(label,renderCell)=>{const tr=node('tr'),heading=node('th','',label);heading.scope='row';tr.append(heading);chosen.forEach(item=>{const td=node('td');renderCell(td,item);tr.append(td);});body.append(tr);};
     row('综合保守分',(td,item)=>{const s=currentScores.get(item._id);td.append(node('strong','compare-score',scoreText(s.low)),node('p','',`可能区间 ${scoreText(s.low)}–${scoreText(s.upper)} / 100`),node('p','',`已知依据 ${percent(s.coverage)} · 源码核验 ${percent(s.review)}`));});
     row('技术栈',(td,item)=>td.append(node('span','',list(item.stack).join(' / ')||string(item.language,'未知'))));
+    if(chosen.some(item=>list(item.usage_requirements).length))row('使用条件与成本',(td,item)=>{const values=list(item.usage_requirements);if(!values.length){td.append(node('span','','尚未记录，需核查'));return;}const ul=node('ul');values.forEach(value=>ul.append(node('li','',value)));td.append(ul);evidenceLinks(td,item.usage_evidence);});
     row('适用对象',(td,item)=>{td.append(node('span','',AUDIENCES[labelAudience(item)]||'尚未确认'));if(item.audience&&typeof item.audience==='object')td.append(node('p','',string(item.audience.reason)));});
     row('发现方式',(td,item)=>{const entries=discoveryEntries(item);td.append(node('span','',entries.length?[...new Set(entries.map(discoveryLabel))].join(' / '):'未记录'));});
     KEYS.forEach(key=>row(LABELS[key],(td,item)=>{const c=criterion(item,key),v=numericCriterion(item,key);td.append(node('strong','',v===null?'未知':`${v.toFixed(1)} / 5`),node('p','',string(c.reason,'尚无判断依据')));evidenceLinks(td,c.evidence);}));
     [['建仓',item=>date(item.created_at)],['最近代码提交',item=>date(item.last_commit_at)],['最近 Release',item=>date(item.latest_release_at)],['Star / Fork',item=>`${format(item.stars)} / ${format(item.forks)}`],['许可证',item=>string(item.license,'未知')||'未知']].forEach(([label,get])=>row(label,(td,item)=>td.append(node('span','',get(item)))));
-    [['可借鉴点','strengths'],['缺口与条件','gaps'],['学习顺序','learning_path']].forEach(([label,key])=>row(label,(td,item)=>{const values=list(item[key]);if(!values.length){td.append(node('span','','尚未记录'));return;}const ul=node('ul');values.forEach(value=>ul.append(node('li','',value)));td.append(ul);}));table.append(body);$('compareContent').replaceChildren(table);
+    [['可借鉴点','strengths'],['缺口与条件','gaps'],['学习 / 使用路线','learning_path']].forEach(([label,key])=>row(label,(td,item)=>{const values=list(item[key]);if(!values.length){td.append(node('span','','尚未记录'));return;}const ul=node('ul');values.forEach(value=>ul.append(node('li','',value)));td.append(ul);}));table.append(body);$('compareContent').replaceChildren(table);
   }
   function reset() {clearFilters();activePreset='';updatePresetButtons();setWeights(initialWeights);$('sortSelect').value='score';render();}
 

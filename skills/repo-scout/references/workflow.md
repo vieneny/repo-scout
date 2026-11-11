@@ -1,18 +1,24 @@
 # Research and rendering workflow
 
+## Direct-reference and no-install use
+
+When the user says to use `https://github.com/vieneny/repo-scout` as a specification, read that repository's `skills/repo-scout/SKILL.md` and the relevant linked references. The workflow URL identifies guidance; include it as a candidate only if the user actually wants to evaluate Repo Scout. Apply the user's following brief, including a brief that names a domain or outcome without an existing project.
+
+An AI with repository/file reading and search capabilities can follow this workflow without installing the Skill. Gather public facts through available tools, review candidate source, and deliver an evidence-backed ranked comparison. Without script execution, use the profile, evidence and scoring rules below to produce a sourced comparison table instead of running the CLI; state that HTML was not rendered. State when search capability is unavailable. Do not describe a hand-written comparison as CLI-generated output. For the optional Python collector and HTML renderer, obtain the complete Skill folder and use Python 3.10+; copying only `SKILL.md` does not include the helpers. A reference link neither grants capabilities nor authorizes installing or running candidate projects.
+
 ## 1. Create a profile
 
 Choose one input. Paths are examples; use a task-owned output folder.
 
 ```bash
-python <skill-directory>/scripts/repo_scout.py profile --idea "A personal knowledge assistant using LangChain and local documents" --stack Python --capability RAG --audience individual --out ./results/profile.json
+python <skill-directory>/scripts/repo_scout.py profile --idea "A personal knowledge assistant using LangChain and local documents" --stack Python --capability RAG --audience individual --constraint "Small enough for one learner" --out ./results/profile.json
 python <skill-directory>/scripts/repo_scout.py profile --local ./my-project --out ./results/profile.json
 python <skill-directory>/scripts/repo_scout.py profile --repo https://github.com/langchain-ai/langchain --out ./results/profile.json
 ```
 
-The profile records a title, goal, stack, capabilities, queries, and target audience. For local input, the scanner reads bounded known manifests and records only technology names and relative filenames. It does not establish business completeness. The host should check the project's actual core flow and refine the goal before searching. Keep search terms abstract enough for public disclosure.
+The profile records a title, goal, stack, capabilities, queries, target audience, and constraints. Repeat `--constraint` for separate limits; these are preserved in `profile.constraints` as review context, not automatically enforced provider filters or verified compatibility. For local input, the scanner reads bounded known manifests and records only technology names and relative filenames. It does not establish business completeness. The host should check the project's actual core flow and refine the goal before searching. Keep search terms abstract enough for public disclosure.
 
-For an idea, clarify concrete input/output and the learning level when that would change the choice: “learn LangChain” can mean its core abstractions, a small RAG application, or operating a multi-user platform. The same repository may score differently for those goals.
+For an idea or desired tool, establish concrete input/output and the learning level when that would change the choice: “learn LangChain” can mean its core abstractions, a small RAG application, or operating a multi-user platform. “Make a video” can mean text-to-video generation, image animation, or editing existing footage. The same repository may score differently for those goals. Use [scenarios.md](scenarios.md) for the relevant academic, application, or media evaluation details.
 
 ## 2. Discover and inspect
 
@@ -27,13 +33,13 @@ The helper returns search receipts and inspection errors. A partial failure perm
 
 The standalone `search --limit` controls hits per provider/query. `inspect --limit` and `run --limit` control the total inspection budget. Discovery retains the collected tail in `search.json`; inspection records how many remain unreviewed. Query/provider combinations are interleaved before applying the inspection budget. A small budget still cannot guarantee coverage of every source or query.
 
-Inspect candidate capabilities against the brief, not an arbitrary checklist. For a RAG learning application, for example, trace document ingestion, indexing, retrieval, generation, and configuration. Authentication or multi-tenancy may be irrelevant to a personal tutorial but decisive for a shared service.
+Inspect candidate capabilities against the brief, not an arbitrary checklist. Trace input → processing/model/dependencies → output. For a RAG learning application, for example, trace document ingestion, indexing, retrieval, generation, and configuration. Authentication or multi-tenancy may be irrelevant to a personal tutorial but decisive for a shared service. For a media tool, the actual workflow, model download, hardware, external API, output examples, and separate model/asset terms can decide whether it is useful to the user.
 
 ## 3. Add the agent's evidence-based assessment
 
 The initial report uses transparent heuristics from public metadata and structural signals. For the final shortlist, the host reads decisive source paths and writes `assessments.json` as described in [assessment.md](assessment.md). Keep “maintainer says,” “source inspected,” and “executed successfully” distinct.
 
-Use immutable commit links when practical for implementation claims. A branch URL is acceptable when paired with the snapshot's retrieval time. Add useful strengths, gaps, and a short learning path: which file, module, or example to read first and why.
+Use immutable commit links when practical for implementation claims. A branch URL is acceptable when paired with the snapshot's retrieval time. Add useful strengths, gaps, and a short learning path: which file, module, or example to read first and why. Keep scenario findings in these existing fields, with optional sourced `usage_requirements` as defined by the assessment schema. Do not invent a mandatory domain schema or fill unknown operating requirements from model familiarity.
 
 ## 4. Score and render offline
 
@@ -47,7 +53,7 @@ Optional `--config weights.json` changes scoring weights. See [scoring.md](scori
 ## Shortcut
 
 ```bash
-python <skill-directory>/scripts/repo_scout.py run --idea "Learn LangChain with a small RAG application" --stack Python --capability RAG --sources github --limit 6 --out-dir ./results
+python <skill-directory>/scripts/repo_scout.py run --idea "Learn LangChain with a small RAG application" --stack Python --capability RAG --constraint "Small enough for one learner" --sources github --limit 6 --out-dir ./results
 ```
 
 `run` writes `profile.json`, `search.json`, `inspected.json`, `report.json`, and `report.html`. It can accept `--assessments` when those judgments already exist. Without assessments, describe the result as an initial heuristic pass. Add `--repo-seed <public-url>` for known candidates; these are supplied seeds, not search discoveries.

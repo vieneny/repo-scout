@@ -44,11 +44,11 @@ def make_profile(args):
     if args.repo:
         provider = get_provider(_repo_provider(args.repo))
         candidate = provider.inspect(provider.resolve(args.repo))
-        profile = build_profile("idea", candidate.get("description") or candidate["name"], stack=args.stack or candidate.get("stack"), capabilities=args.capability, audience=args.audience)
+        profile = build_profile("idea", candidate.get("description") or candidate["name"], stack=args.stack or candidate.get("stack"), capabilities=args.capability, audience=args.audience, constraints=args.constraint)
         profile.update(kind="repository", title=candidate["name"], repository_url=candidate["url"], seed_id=candidate["id"])
         profile["observations"] = [{"kind": "repository-metadata", "url": candidate["url"], "note": "Public metadata and bounded source inspection; candidate code was not executed."}]
         return profile
-    return build_profile("local" if args.local else "idea", args.local or args.idea, stack=args.stack, capabilities=args.capability, audience=args.audience)
+    return build_profile("local" if args.local else "idea", args.local or args.idea, stack=args.stack, capabilities=args.capability, audience=args.audience, constraints=args.constraint)
 
 
 def discover(profile, sources, queries=None, limit=8, seeds=None):
@@ -147,6 +147,7 @@ def _input_flags(parser):
     group.add_argument("--repo", help="Public GitHub/Gitee/GitLab repository URL")
     parser.add_argument("--stack", action="append", default=[], help="Desired technology; repeatable")
     parser.add_argument("--capability", action="append", default=[], help="Core capability; repeatable")
+    parser.add_argument("--constraint", action="append", default=[], help="Explicit setup, license, hardware, or other constraint; repeatable, retained for agent review")
     parser.add_argument("--audience", choices=["individual", "team", "enterprise"], default="individual")
 
 

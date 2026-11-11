@@ -18,14 +18,14 @@
     </header>
     <main id="top">
       <section class="brief" aria-labelledby="reportTitle">
-        <div class="brief-copy"><p class="eyebrow">从需求到证据 / RESEARCH SNAPSHOT</p><h1 id="reportTitle">__REPORT_TITLE__</h1><p class="brief-goal" id="profileGoal"></p><div class="brief-tags" id="profileTags"></div></div>
-        <aside class="reading-note"><p class="note-label">先选适合你的，再看热度</p><p>排名围绕这次学习目标。每个判断保留依据，缺失信息显示为未知；企业规模不会自动获得加分。</p><div class="note-bottom"><span class="evidence-key"></span><span>分数与证据一起阅读</span></div></aside>
+        <div class="brief-copy"><p class="eyebrow">从需求到证据 / RESEARCH SNAPSHOT</p><h1 id="reportTitle">__REPORT_TITLE__</h1><p class="brief-goal" id="profileGoal"></p><div class="brief-tags" id="profileTags"></div><section class="profile-constraints" id="profileConstraints" aria-label="本次使用约束" hidden></section></div>
+        <aside class="reading-note"><p class="note-label">先选适合你的，再看热度</p><p>排名围绕这次学习或使用目标。每个判断保留依据，缺失信息显示为未知；企业规模不会自动获得加分。</p><div class="note-bottom"><span class="evidence-key"></span><span>分数与证据一起阅读</span></div></aside>
       </section>
       <div class="research-summary" id="researchSummary" aria-live="polite"></div>
       <div class="workspace">
         <aside class="control-panel" aria-label="筛选和评分设置">
           <div class="panel-heading"><span class="eyebrow">调整研究视角</span><button id="resetButton" class="text-button" type="button">重置</button></div>
-          <label class="field-label" for="searchInput">查找项目或技术栈</label><input id="searchInput" type="search" placeholder="例如 LangChain、Python、RAG" autocomplete="off">
+          <label class="field-label" for="searchInput">查找项目、能力或技术栈</label><input id="searchInput" type="search" placeholder="例如 Java、AI 绘图、视频" autocomplete="off">
           <label class="field-label" for="providerFilter">来源</label><select id="providerFilter"><option value="">所有来源</option></select>
           <label class="field-label" for="audienceFilter">适用对象</label><select id="audienceFilter"><option value="">所有类型</option><option value="individual">个人学习 / 使用</option><option value="team">团队协作</option><option value="enterprise">企业方向</option><option value="unknown">尚未确认</option></select>
           <div class="weight-title"><h2>评分权重</h2><span>/ 100</span></div>

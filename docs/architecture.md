@@ -2,6 +2,8 @@
 
 Repo Scout separates repeatable data work from judgment. The Skill guides a compatible AI host, the Python CLI collects and scores evidence, and a self-contained HTML file delivers the result. There is no application server or separate model service in the core workflow.
 
+The first-use entry is a repository link followed by a natural-language goal. The host reads the Skill and relevant scenario guidance; the Repo Scout link is the workflow reference, while the rest of the request defines the discovery target. A host with repository browsing can use its own research tools without installation. The optional Python helper automates collection, scoring and HTML rendering.
+
 ```mermaid
 flowchart TD
     Input[Repository URL, local project, or idea] --> Skill[Skill: frame the learning goal]
@@ -32,7 +34,7 @@ flowchart TD
 | Layer | Owns | Does not establish |
 |---|---|---|
 | Skill | Framing the task, choosing appropriate evidence, routing the host's work, delivering a useful shortlist | Permission to execute candidate code or publish private project information |
-| Local profile | Bounded known manifests, technology names, relative evidence filenames, abstract search terms | A complete business specification or runtime behavior |
+| Local profile | Bounded known manifests, technology names, relative evidence filenames, abstract search terms, explicit constraints | A complete business specification or runtime behavior |
 | Provider adapters | Public repository identity, search results, metadata, timestamps, bounded README/manifests/tree evidence | Exhaustive search coverage or equal availability across hosts |
 | Host review | Contextual relevance, actual stack, task-specific completeness, audience fit, useful reuse/study paths | Successful execution unless it was separately performed and reported |
 | Scoring | Deterministic weighted judgments, score bounds, coverage, reproducible ordering | A universal quality leaderboard or enterprise certification |
@@ -57,6 +59,8 @@ The separate `search --limit` option controls hits per provider/query. `inspect 
 The seven default dimensions are relevance, stack fit, completeness, maintenance, learning fit, reuse, and popularity. See [the scoring reference](../skills/repo-scout/references/scoring.md) for the weights and formula.
 
 The CLI can produce a transparent heuristic first pass. A host review improves that pass by reading implementation paths and assigning explained, source-linked judgments. Structural evidence such as `tests/`, a CI file, or a Dockerfile must remain distinct from passing tests or a working deployment.
+
+The same workflow supports business and graduation projects, AI images, video, audio and writing tools. `profile.constraints` records the user's operating limits without automatically adding them to public queries or certifying compatibility. Source-reviewed assessments can add `usage_requirements` with `usage_evidence` links for hardware, APIs, model or asset terms, costs and input/output requirements. The report displays these findings in project details and comparison; Repo Scout itself does not execute the creative tools.
 
 Unknown values widen the score interval. A source-reviewed zero has evidence and is different from an unknown. Reports expose known-evidence coverage and source-review coverage separately. Audience labels describe individual/team/enterprise-oriented scope without treating size as an inherent advantage.
 

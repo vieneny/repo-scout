@@ -119,14 +119,32 @@ class CLITests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             profile_path = root / "profile.json"
-            self.assertEqual(main(["profile", "--idea", "Learn LangChain RAG", "--stack", "Python", "--out", str(profile_path)]), 0)
+            self.assertEqual(main(["profile", "--idea", "Learn LangChain RAG", "--stack", "Python", "--constraint", "CPU only", "--constraint", "MIT license", "--out", str(profile_path)]), 0)
             profile = json.loads(profile_path.read_text(encoding="utf-8"))
+            self.assertEqual(profile["constraints"], ["CPU only", "MIT license"])
             envelope = {"schema_version": 1, "profile": profile, "candidates": [{"id": "github:a/a", "name": "a/a", "provider": "github", "url": "https://github.com/a/a", "description": "Python LangChain RAG", "stars": 200}]}
             (root / "input.json").write_text(json.dumps(envelope), encoding="utf-8")
             with patch("scout.cli.get_provider", side_effect=AssertionError("Offline operation used network")):
                 self.assertEqual(main(["score", "--input", str(root / "input.json"), "--out", str(root / "report.json")]), 0)
                 self.assertEqual(main(["render", "--input", str(root / "report.json"), "--out", str(root / "report.html")]), 0)
             self.assertIn("LangChain", (root / "report.html").read_text(encoding="utf-8"))
+            self.assertEqual(json.loads((root / "report.json").read_text(encoding="utf-8"))["profile"]["constraints"], ["CPU only", "MIT license"])
+
+    def test_run_retains_constraints_without_making_them_search_terms(self):
+        with tempfile.TemporaryDirectory() as temp:
+            calls = []
+            with patch("scout.cli.get_provider", side_effect=lambda source: MultiProvider(source, calls)):
+                result = main(["run", "--idea", "学习Java的毕设设计项目", "--constraint", "No paid API", "--constraint", "CPU only", "--limit", "1", "--out-dir", temp])
+            self.assertEqual(result, 0)
+            root = Path(temp)
+            profile = json.loads((root / "profile.json").read_text(encoding="utf-8"))
+            report = json.loads((root / "report.json").read_text(encoding="utf-8"))
+            self.assertEqual(profile["constraints"], ["No paid API", "CPU only"])
+            self.assertEqual(report["profile"]["constraints"], profile["constraints"])
+            searches = [call[2] for call in calls if call[0] == "search"]
+            self.assertTrue(searches)
+            self.assertTrue(all("Java" in query and ("graduation-project" in query or "毕业设计" in query) for query in searches))
+            self.assertFalse(any("paid" in query or "CPU" in query for query in searches))
 
 
 if __name__ == "__main__":
